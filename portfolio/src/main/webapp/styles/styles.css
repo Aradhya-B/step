@@ -1,0 +1,118 @@
+body {
+ font-family: 'Work Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: 'Crimson Text', serif;
+}
+
+main {
+    display: flex;
+    flex-basis: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.content {
+    display: flex;
+    border: solid 0.5em transparent;
+    flex-direction: column;
+    width: 40%;
+    height: auto;
+    text-align: left;
+}
+
+.title {
+    color: #0c8716;
+    font-size: 4em;
+    margin: 0;
+}
+
+#pronounce {
+  width: 1.5em;
+  height: auto;
+  cursor: pointer;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+.main, li {
+    font-size: 1.1em;
+}
+
+.portrait {
+    display: flex;
+    flex-direction: column;
+    border: solid 0.5em transparent;
+    width: 40%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+img {
+    text-align: center;
+    width: 750px;
+    height: auto;
+    /* width: 100%;
+    height: auto; */
+}
+
+.link {
+    color: #0c8716; 
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.icon {
+  width: 1.2em;
+  height: auto;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85)
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.list-link {
+    color: #747474;
+    text-decoration: none;
+}
+
+.list-link:hover {
+    color: #0c8716;
+}
+
+footer {
+  text-align: center;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  main {   
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+  }
+
+  .content {
+      width: 80%;
+      margin: 0 auto;
+  }
+
+  .portrait {
+      width: 80%;
+      margin: 0 auto;
+  }
+}
