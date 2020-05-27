@@ -42,7 +42,7 @@ main {
     margin: 10px;
 }
 
-.main, li {
+.main > li {
     font-size: 1.1em;
 }
 
@@ -82,7 +82,8 @@ img {
 }
 
 .icon:hover {
-  transform: scale(1.1);
+  animation: heartBeat;
+  animation-duration: 2s;
 }
 
 .list-link {
