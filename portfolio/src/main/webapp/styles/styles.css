@@ -46,6 +46,19 @@ main {
     font-size: 1.5em;
 }
 
+.baffle {
+  flex-grow: 1;
+  display: table;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.baffle-inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
 .portrait {
     display: flex;
     flex-direction: column;
