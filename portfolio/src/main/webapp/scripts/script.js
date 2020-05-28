@@ -41,10 +41,10 @@ const createBreathingHalftoneImage = (img) => {
 	  oscAmplitude: 0.2,
 	  channels: ['green', 'lum'],
 	  friction: 0.2,
-	  hoverDiameter: 0.3,
-	  hoverForce: 0.004,
-	  activeDiameter: 0.4,
-	  activeForce: 0.008
+	  hoverDiameter: 0.4,
+	  hoverForce: 0.01,
+	  activeDiameter: 0.5,
+	  activeForce: 0.03
 	});
 }
 
