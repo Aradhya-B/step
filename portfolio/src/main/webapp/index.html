@@ -24,18 +24,20 @@
   <body>
     <main>
       <div class="content">
-        <h1 class="title">aradhya ▪<em>noun</em></h1>
+        <span class="title" id="typed"></span>
+        <div class="content-main">
           <span>
             <h3 class="title" style="font-size: 2.5em; display: inline;">[<em>Say</em> uh-rah-dee-uh]</h3>
             <img class="icon" src="images/sound.png" onclick="playAudio('images/name.mp3')">
           </span>
         <h5 class="subtitle">
           <em>
-            1. software engineering and business student enrolled at western
-            university 2. likes to code and work on startups. 3. passionate
-            about product development, business strategy, basketball, and
-            self-improvement. 4. dreams big and gets s#$% done
-          </em>
+            1. software engineering and business student.
+            2. passionate about writing beautiful code, product development, and startups.
+            3. Renaissance man in the making. 
+            4. interested in mythology, physical cosmology, philosophy, and basketball.
+            5. likes to get $#!^ done
+         </em>
         </h5>
         <ul class="main">
           <li>
@@ -68,6 +70,13 @@
               had a passion for sports
             </a>
             and in particular for basketball
+          </li>
+          <li>
+            I am a believer of 
+            <a class="list-link" href="https://en.wikipedia.org/wiki/Stoicism" target="#">
+              stoicism
+            </a>
+            and a definite optimist
           </li>
           <li>
             I really like to 
@@ -119,20 +128,15 @@
             </a>
           </li>
         </ul>
-        <p>
-          <a class="link" href="mailto:aradhyabansal2000@gmail.com">
-            Want to chat? Shoot me an email!
-          </a>
-        </p>
         <div class="baffle">
           Smile more, it looks good on you!
         </div>
-        <div style="text-align: center">
-          <em>
+        <div style="text-align: center; color:#0c8716;">
+          <em id="secret-sub">
             Maybe clicking something on the page will reveal the secret message?
-            Only one way to find out...
           </em>
         </div>
+      </div>
       </div>
       <div class="portrait">
         <img src="images/Headshot-No-Bg.png" />
@@ -149,10 +153,14 @@
           <a class="link" href="https://learnhappy.ca" target="#">
             <img alt="blog" src="images/icons/blog.svg" class="icon">
           </a>
+          <a class="link" href="mailto:aradhyabansal2000@gmail.com" target="#">
+            <img alt="email" src="images/icons/mail.svg" class="icon">
+          </a>
         </p>
     </footer>
     <script src='scripts/breathing-halftone.js'></script>
     <script src='scripts/lightbox-and-jquery.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <script src='scripts/baffle.min.js'></script>
     <script src='scripts/script.js'></script> 
   </body>

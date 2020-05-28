@@ -25,6 +25,11 @@ main {
     text-align: left;
 }
 
+.content-main {
+  opacity: 0;
+  transition: opacity 1s linear;
+}
+
 .title {
     color: #0c8716;
     font-size: 4em;
@@ -48,6 +53,7 @@ main {
 
 .baffle {
   display: flex;
+  color: #0c8716; 
   flex-grow: 1;
   justify-content: center;
   align-items: center;
@@ -64,14 +70,13 @@ main {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    visibility: hidden;
 }
 
 img {
     text-align: center;
     width: 750px;
     height: auto;
-    /* width: 100%;
-    height: auto; */
 }
 
 .link {
@@ -106,6 +111,8 @@ img {
 
 footer {
   text-align: center;
+  opacity: 0;
+  transition: opacity 1s linear;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
