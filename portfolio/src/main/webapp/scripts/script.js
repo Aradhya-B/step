@@ -21,6 +21,8 @@ const playAudio = (audioClip) => {
 	audio.play();
 };
 
+// Breathing halftone configuration on portrait image
+
 var img = document.querySelector('.portrait img');
 
 new BreathingHalftone( img, {
@@ -36,4 +38,13 @@ new BreathingHalftone( img, {
   activeDiameter: 0.4,
   activeForce: 0.008
 });
+
+// Baffle config and functions
+
+const b = baffle(document.querySelector('.baffle'), {
+	speed: 75
+}).start();
+
+const revealSecretMessage = () => b.reveal(3000);
+
 

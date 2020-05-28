@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="assets/cartoon-edited.png" />
+    <link rel="shortcut icon" href="images/Headshot-No-Bg.png" />
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700"
@@ -27,7 +27,7 @@
         <h1 class="title">aradhya ▪<em>noun</em></h1>
           <span>
             <h3 class="title" style="font-size: 2.5em; display: inline;">[<em>Say</em> uh-rah-dee-uh]</h3>
-            <img class="icon" src="assets/sound.png" onclick="playAudio('assets/name.mp3')">
+            <img class="icon" src="images/sound.png" onclick="playAudio('images/name.mp3')">
           </span>
         <h5 class="subtitle">
           <em>
@@ -44,19 +44,19 @@
           <li>
             I have an 
             <a class="list-link" 
-              href="assets/family.png" data-lightbox="Family" data-title"Family">
+              href="images/family.png" data-lightbox="Family" data-title"Family">
               amazing family
             </a>
             and 
             <a class="list-link" 
-              href="assets/friends.png" data-lightbox="Friends" data-title"Friends">
+              href="images/friends.png" data-lightbox="Friends" data-title"Friends">
               amazing friends
             </a>
           </li>
           <li>
             I developed a 
             <a class="list-link" 
-              href="assets/bugs.png" data-lightbox="Bugs" data-title"Bugs">
+              href="images/bugs.png" data-lightbox="Bugs" data-title"Bugs">
               fear of bugs
             </a>
             at an early age
@@ -64,7 +64,7 @@
           <li>
             I have always 
             <a class="list-link" 
-              href="assets/sports.png" data-lightbox="Sports" data-title"Sports">
+              href="images/sports.png" data-lightbox="Sports" data-title"Sports">
               had a passion for sports
             </a>
             and in particular for basketball
@@ -88,11 +88,11 @@
             <a class="list-link" href="https://google.ca" target="#">Google</a>
           </li>
           <li>
-            A
+            I won 
             <a class="list-link" href="https://devpost.com/software/macros" target="#">
-              hackathon project
+              a hackathon
             </a>
-            led me to start my first business
+            that led me to start my first business
           </li>
           <li>
             I was the President of the 
@@ -102,7 +102,7 @@
           </li>
           <li>
             I have a more detailed 
-            <a class="list-link" href="assets/aradhya-resume.pdf" target="#">
+            <a class="list-link" href="images/aradhya-resume.pdf" target="#">
               resume
             </a>
             if you're into that sort of thing
@@ -110,7 +110,11 @@
           <li>
             I am as cool as a 
             <a class="list-link" 
-              href="assets/cucumber.png" data-lightbox="Cucumber" data-title"Cucumber">
+              href="images/cucumber.png" 
+              data-lightbox="Cucumber" 
+              data-title="Welp, you revealed the secret message."
+              onclick="revealSecretMessage()"
+            >
               cucumber
             </a>
           </li>
@@ -121,28 +125,35 @@
           </a>
         </p>
         <div class="baffle">
-          <p class=baffle-inner">Vim is better than Emacs</p>
+          Smile more, it looks good on you!
+        </div>
+        <div style="text-align: center">
+          <em>
+            Maybe clicking something on the page will reveal the secret message?
+            Only one way to find out...
+          </em>
         </div>
       </div>
       <div class="portrait">
-        <img src="assets/Headshot-No-Bg.png" />
+        <img src="images/Headshot-No-Bg.png" />
       </div>
     </main>
     <footer>
         <p>
           <a class="link" href="https://www.linkedin.com/in/aradhya-b/" target="#"> 
-            <img alt="linkedin" src="assets/icons/linkedin.svg" class="icon">
+            <img alt="linkedin" src="images/icons/linkedin.svg" class="icon">
           </a>
           <a class="link" href="https://github.com/Aradhya-B" target="#">
-            <img alt="github" src="assets/icons/github.svg" class="icon">
+            <img alt="github" src="images/icons/github.svg" class="icon">
           </a>
           <a class="link" href="https://learnhappy.ca" target="#">
-            <img alt="blog" src="assets/icons/blog.svg" class="icon">
+            <img alt="blog" src="images/icons/blog.svg" class="icon">
           </a>
         </p>
     </footer>
     <script src='scripts/breathing-halftone.js'></script>
-    <script src='scripts/script.js'></script> 
     <script src='scripts/lightbox-and-jquery.js'></script>
+    <script src='scripts/baffle.min.js'></script>
+    <script src='scripts/script.js'></script> 
   </body>
 </html>

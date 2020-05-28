@@ -47,16 +47,12 @@ main {
 }
 
 .baffle {
+  display: flex;
   flex-grow: 1;
-  display: table;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: 1.5em;
-}
-
-.baffle-inner {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
 }
 
 .portrait {
