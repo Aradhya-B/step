@@ -2,166 +2,196 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="images/icons/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <link rel="shortcut icon" href="images/icons/favicon.png"/>
+    <!-- FONTS -->
     <link
-      href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Crimson+Text|Work+Sans:400,700"
     />
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+    <!-- css animation library -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
     />
+    <!-- stylesheet for ligthbox library that allows images to be overlayed on page -->
     <link
       rel="stylesheet"
       href="styles/lightbox.css"
     />
+    <!-- METADATA -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aradhya's Website" />
     <meta name="theme-color" content="#000000" />
+    <!-- TITLE -->
     <title>Who is Aradhya Bansal?</title>
   </head>
   <body>
     <main>
+      <!-- holds all text content -->
       <div class="content">
+        <!-- holds text that is typed with typed.js library -->
         <span class="title" id="typed"></span>
-        <div class="content-main">
-          <span>
-            <h3 class="title" style="font-size: 2.5em; display: inline;">[<em>Say</em> uh-rah-dee-uh]</h3>
-            <img class="icon" src="images/sound.png" onclick="playAudio('images/name.mp3')">
-          </span>
-        <h5 class="subtitle">
-          <em>
-            1. software engineering and business student.
-            2. passionate about writing beautiful code, product development, and startups.
-            3. Renaissance man in the making. 
-            4. interested in mythology, physical cosmology, philosophy, and basketball.
-            5. likes to get $#!^ done
-         </em>
-        </h5>
-        <ul class="main">
-          <li>
-            I was born and raised in Calgary, Alberta
-          </li>
-          <li>
-            I have an 
-            <a class="list-link" 
-              href="images/family.png" data-lightbox="Family" data-title"Family">
-              amazing family
-            </a>
-            and 
-            <a class="list-link" 
-              href="images/friends.png" data-lightbox="Friends" data-title"Friends">
-              amazing friends
-            </a>
-          </li>
-          <li>
-            I developed a 
-            <a class="list-link" 
-              href="images/bugs.png" data-lightbox="Bugs" data-title"Bugs">
-              fear of bugs
-            </a>
-            at an early age
-          </li>
-          <li>
-            I have always 
-            <a class="list-link" 
-              href="images/sports.png" data-lightbox="Sports" data-title"Sports">
-              had a passion for sports
-            </a>
-            and in particular for basketball
-          </li>
-          <li>
-            I am a believer of 
-            <a class="list-link" href="https://en.wikipedia.org/wiki/Stoicism" target="#">
-              stoicism
-            </a>
-            and a definite optimist
-          </li>
-          <li>
-            I really like to 
-            <a class="list-link" href="https://youtu.be/oFbrrCqxzTM" target="#">dance at Indian Weddings</a>
-            with my best friends
-          </li>
-          <li>
-            I enrolled in software engineering and business at
-            <a class="list-link" href="https://uwo.ca" target="#">Western University</a>
-            in 2018
-          </li>
-          <li>
-            I love to code and have done software engineering internships at 
-            <a class="list-link" href="https://gdmissionsystems.ca/" target="#">General Dynamics</a>,
-            <a class="list-link" href="https://www.linkedin.com/company/ltvnumbers/" target="#"
-              >LTV Numbers</a
-            >, and
-            <a class="list-link" href="https://google.ca" target="#">Google</a>
-          </li>
-          <li>
-            I won 
-            <a class="list-link" href="https://devpost.com/software/macros" target="#">
-              a hackathon
-            </a>
-            that led me to start my first business
-          </li>
-          <li>
-            I was the President of the 
-            <a class="list-link" href="https://foundersnetwork.ca" target="#">
-              largest tech and entrepreneurship club at Western
-            </a>
-          </li>
-          <li>
-            I have a more detailed 
-            <a class="list-link" href="images/aradhya-resume.pdf" target="#">
-              resume
-            </a>
-            if you're into that sort of thing
-          </li>
-          <li>
-            I am as cool as a 
-            <a class="list-link" 
-              href="images/cucumber.png" 
-              data-lightbox="Cucumber" 
-              data-title="Welp, you revealed the secret message."
-              onclick="revealSecretMessage()"
-            >
-              cucumber
-            </a>
-          </li>
-        </ul>
-        <div class="baffle">
-          Smile more, it looks good on you!
-        </div>
-        <div style="text-align: center; color:#0c8716;">
-          <em id="secret-sub">
-            Maybe clicking something on the page will reveal the secret message?
-          </em>
+          <!-- holds main text on page -->
+          <div class="content-main">
+            <span>
+              <h3 class="subtitle">
+                [<em>Say</em> uh-rah-dee-uh]
+              </h3>
+              <!-- icon that plays audio clip of my name when clicked -->
+              <img 
+                class="icon" 
+                src="images/sound.png" 
+                onclick="playAudio('images/name.mp3')"
+              >
+            </span>
+          <!-- dictionary definition for aradhya -->
+          <h5 class="definition">
+            <em>
+              1. software engineering and business student.
+              2. passionate about writing beautiful code, product development, and startups.
+              3. Renaissance man in the making. 
+              4. interested in mythology, physical cosmology, philosophy, and basketball.
+              5. likes to get $#!^ done
+           </em>
+          </h5>
+          <!-- list that holds bullet points about my life -->
+          <ul class="list">
+            <li>
+              I was born and raised in Calgary, Alberta
+            </li>
+            <li>
+              I have an 
+              <a class="list-link" 
+                href="images/family.png" 
+                data-lightbox="Family" 
+                data-title="My Family">amazing family</a>
+              and 
+              <a class="list-link" 
+                href="images/friends.png" 
+                data-lightbox="Friends" 
+                data-title="My Friends">amazing friends</a>
+            </li>
+            <li>
+              I developed a 
+              <a class="list-link" 
+                href="images/bugs.png" 
+                data-lightbox="Bugs" 
+                data-title"Me Peeing My Pants">fear of bugs</a>
+              at an early age
+            </li>
+            <li>
+              I have always 
+              <a class="list-link" 
+                href="images/sports.png" 
+                data-lightbox="Sports" 
+                data-title="Superstar in the Making">had a passion for sports</a>
+            </li>
+            <li>
+              I am a believer of 
+              <a class="list-link" 
+                href="https://en.wikipedia.org/wiki/Stoicism" 
+                target="#">stoicism</a>
+              and a definite optimist
+            </li>
+            <li>
+              I really like to 
+              <a class="list-link" 
+                href="https://youtu.be/oFbrrCqxzTM" 
+                target="#">dance at Indian Weddings</a>
+              with my best friends
+            </li>
+            <li>
+              I enrolled in software engineering and business at
+              <a class="list-link" 
+                 href="https://uwo.ca" 
+                 target="#">Western University</a>
+              in 2018
+            </li>
+            <li>
+              I love to code and have done software engineering internships at 
+              <a class="list-link" 
+                 href="https://gdmissionsystems.ca/" 
+                 target="#">General Dynamics</a>,
+              <a class="list-link" 
+                 href="https://www.linkedin.com/company/ltvnumbers/" 
+                 target="#">LTV Numbers</a>, and
+              <a class="list-link" 
+                href="https://google.ca" 
+                target="#">Google</a>
+            </li>
+            <li>
+              I won 
+              <a class="list-link" 
+                href="https://devpost.com/software/macros" 
+                target="#">a hackathon</a>
+              that led me to start my first business
+            </li>
+            <li>
+              I was the President of the 
+              <a class="list-link" 
+                href="https://foundersnetwork.ca" 
+                target="#">largest tech and entrepreneurship club at Western</a>
+            </li>
+            <li>
+              I have a more detailed 
+              <a class="list-link" 
+                href="images/aradhya-resume.pdf" 
+                target="#">resume</a>
+              if you're into that sort of thing
+            </li>
+            <!-- clicking the cucumber link will reveal the secret message -->
+            <li>
+              I am as cool as a 
+              <a class="list-link" 
+                href="images/cucumber.png" 
+                data-lightbox="Cucumber" 
+                data-title="Welp, you revealed the secret message."
+                onclick="revealSecretMessage()">cucumber</a>
+            </li>
+          </ul>
+          <!-- secret message that uses the baffle js library -->
+          <div class="baffle">
+            Smile more, it looks good on you!
+          </div>
+          <div class="baffle-inner">
+            <em id="secret-sub">
+              Maybe clicking something on the page will reveal the secret message?
+            </em>
+          </div>
         </div>
       </div>
-      </div>
+      <!-- main picture that uses breathing half tone library -->
       <div class="portrait">
         <img src="images/headshot.png" />
       </div>
     </main>
+    <!-- holds icons that link to personal pages -->
     <footer>
-        <p>
-          <a class="link" href="https://www.linkedin.com/in/aradhya-b/" target="#"> 
-            <img alt="linkedin" src="images/icons/linkedin.svg" class="icon">
-          </a>
-          <a class="link" href="https://github.com/Aradhya-B" target="#">
-            <img alt="github" src="images/icons/github.svg" class="icon">
-          </a>
-          <a class="link" href="https://learnhappy.ca" target="#">
-            <img alt="blog" src="images/icons/blog.svg" class="icon">
-          </a>
-          <a class="link" href="mailto:aradhyabansal2000@gmail.com" target="#">
-            <img alt="email" src="images/icons/mail.svg" class="icon">
-          </a>
-        </p>
+        <a class="link" href="https://www.linkedin.com/in/aradhya-b/" target="#"> 
+          <img alt="linkedin" src="images/icons/linkedin.svg" class="icon">
+        </a>
+        <a class="link" href="https://github.com/Aradhya-B" target="#">
+          <img alt="github" src="images/icons/github.svg" class="icon">
+        </a>
+        <a class="link" href="https://learnhappy.ca" target="#">
+          <img alt="blog" src="images/icons/blog.svg" class="icon">
+        </a>
+        <a class="link" href="mailto:aradhyabansal2000@gmail.com" target="#">
+          <img alt="email" src="images/icons/mail.svg" class="icon">
+        </a>
     </footer>
+    <!-- SCRIPTS -->
+    <!-- makes images go woah with lots of floaty dots -->
     <script src="scripts/breathing-halftone.js"></script>
+    <!-- used to overlay images on current page with jquery -->
     <script src="scripts/lightbox-and-jquery.js"></script>
+    <!-- adds visual typing effect -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <!-- obfuscates and reveals text in DOM elements -->
     <script src="scripts/baffle.min.js"></script>
+    <!-- custom script that uses the other libraries -->
     <script src="scripts/script.js"></script> 
   </body>
 </html>
