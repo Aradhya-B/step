@@ -7,47 +7,69 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 main {
-    display: flex;
-    flex-basis: 50%;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    margin: 1em auto;
+  display: flex;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  margin: 1em auto;
 }
 
 .content {
-    display: flex;
-    border: solid 0.5em transparent;
-    flex-direction: column;
-    width: 40%;
-    height: auto;
-    text-align: left;
+  display: flex;
+  border: solid 0.5em transparent;
+  flex-direction: column;
+  width: 40%;
+  height: auto;
+  text-align: left;
+}
+
+.title {
+  /* green */
+  color: #0c8716;
+  font-size: 4em;
+  margin: 0;
 }
 
 .content-main {
+  /* initially hidden with 0 opacity
+   * revealed after typing animation completion
+   * with a smooth transition
+   */
   opacity: 0;
   transition: opacity 1s linear;
 }
 
-.title {
-    color: #0c8716;
-    font-size: 4em;
-    margin: 0;
-}
-
-#pronounce {
-  width: 1.5em;
-  height: auto;
-  cursor: pointer;
-}
-
 .subtitle {
+  color: #0c8716;
+  display: inline;
+  font-size: 2.5em;
+}
+
+.icon {
+  width: 1.2em;
+  height: auto;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  /* adds a green filter to all icons to match page design */
+  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85)
+}
+
+.icon:hover {
+  /* heartbeat animation from animate.css library */
+  animation: heartBeat;
+  animation-duration: 2s;
+}
+
+.definition {
     font-size: 1.5em;
     margin: 10px;
 }
 
-.main > li {
+.list > li {
     font-size: 1.5em;
 }
 
@@ -59,6 +81,11 @@ main {
   align-items: center;
   text-align: center;
   font-size: 1.5em;
+}
+
+.baffle-inner {
+  color: #0c8716;
+  text-align: center;
 }
 
 .portrait {
@@ -85,22 +112,8 @@ img {
     font-size: 1.5em;
 }
 
-.icon {
-  width: 1.2em;
-  height: auto;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
-  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85)
-}
-
-.icon:hover {
-  animation: heartBeat;
-  animation-duration: 2s;
-}
-
 .list-link {
+    /* grey */
     color: #747474;
     text-decoration: none;
 }
