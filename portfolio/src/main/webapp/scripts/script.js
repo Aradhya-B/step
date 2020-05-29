@@ -13,16 +13,26 @@
 // limitations under the License.
 
 /**
- * Adds a random greeting to the page.
+ * Plays audio clip
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+const playAudio = (audioClip) => {
+	const audio = new Audio(audioClip);
+	audio.volume = 0.5;
+	audio.play();
+};
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+var img = document.querySelector('.portrait img');
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
+new BreathingHalftone( img, {
+  dotSize: 1/200,
+  dotSizeThreshold: 0.01,
+  initVelocity: 0.7,
+  oscPeriod: 2,
+  channels: [ 'lum' ],
+  friction: 0.25,
+  hoverDiameter: 0.4,
+  hoverForce: 0.004,
+  activeDiameter: -0.4,
+  activeForce: 0.004
+});
+
