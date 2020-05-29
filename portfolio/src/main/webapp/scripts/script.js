@@ -71,9 +71,5 @@ const revealSecretMessage = () => {
  */
 const playAudio = (audioClip) => {
 	const audio = new Audio(audioClip);
-
-	// lower the default volume
-	audio.volume = 0.5;
-
 	audio.play();
 };
