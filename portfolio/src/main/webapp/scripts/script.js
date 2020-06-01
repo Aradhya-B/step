@@ -72,4 +72,13 @@ const revealSecretMessage = () => {
 const playAudio = (audioClip) => {
 	const audio = new Audio(audioClip);
 	audio.play();
+}
+
+/*
+ * Fetches data from java servlet and adds it to DOM tree
+ */
+const fetchAndInsertDataIntoDOM = async () => {
+	const response = await fetch('/data');
+	const data = await response.text();
+	document.getElementById('data-container').innerText = data;
 };
