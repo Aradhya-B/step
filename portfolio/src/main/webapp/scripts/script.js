@@ -1,50 +1,75 @@
-// Copyright 2019 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/*
+ * Configures and creates new typing visual for title on page load
+ */
+const options = {
+	strings: [
+		'Who the <strong>fork</strong> is Aradhya?',
+		'Let\'s check the dictionary.',
+		'^500 aradhya ▪ <em>noun</em> ^500'
+	],
+	typeSpeed: 35,
+	backSpeed: 35,
+	backDelay: 500,
+	showCursor: false,
+	/*
+	 * After the typing animation is complete,
+	 * reveal all the page content and create 
+	 * breathing half tone out of main image
+	 */
+	onComplete: () => {
+		const content = document.querySelector('.content-main');
+		const footer = document.querySelector('footer');
+		const img = document.querySelector('.portrait img');
+		const portrait = document.querySelector('.portrait');
+		content.style.opacity = 1;
+		portrait.style.visibility = 'visible';
+		footer.style.opacity = 1;
+
+		// Configuration for breathing half tone
+		new BreathingHalftone( img, {
+		  dotSize: 1/120,
+		  dotSizeThreshold: 0.01,
+		  initVelocity: 0.7,
+		  oscPeriod: 2,
+		  oscAmplitude: 0.2,
+		  channels: ['green', 'lum'],
+		  friction: 0.2,
+		  hoverDiameter: 0.4,
+		  hoverForce: 0.01,
+		  activeDiameter: 0.5,
+		  activeForce: 0.03
+		});
+	}
+}
+
+const typed = new Typed('#typed', options);
+
+/*
+ * Starts obscuring secret message on page load
+ */
+const b = baffle(document.querySelector('.baffle'), {
+	speed: 75
+}).start();
+
+/*
+ * Sets text on subtitle text of secret message
+ */
+const setSecretMessageSubText = (text) => {
+	const secretMessageSubtitle = document.querySelector('#secret-sub');
+	secretMessageSubtitle.innerHTML = text;
+}
+
+/*
+ * Reveals secret message and sets text on secret message subtitle
+ */
+const revealSecretMessage = () => {
+	b.reveal(3000, setSecretMessageSubText('I truly mean it!'));
+}
 
 /**
  * Plays audio clip
  */
 const playAudio = (audioClip) => {
 	const audio = new Audio(audioClip);
-	audio.volume = 0.5;
 	audio.play();
 };
-
-// Breathing halftone configuration on portrait image
-
-var img = document.querySelector('.portrait img');
-
-new BreathingHalftone( img, {
-  dotSize: 1/120,
-  dotSizeThreshold: 0.01,
-  initVelocity: 0.7,
-  oscPeriod: 2,
-  oscAmplitude: 0.2,
-  channels: ['green', 'lum'],
-  friction: 0.2,
-  hoverDiameter: 0.3,
-  hoverForce: 0.004,
-  activeDiameter: 0.4,
-  activeForce: 0.008
-});
-
-// Baffle config and functions
-
-const b = baffle(document.querySelector('.baffle'), {
-	speed: 75
-}).start();
-
-const revealSecretMessage = () => b.reveal(3000);
-
-
