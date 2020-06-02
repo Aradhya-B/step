@@ -30,17 +30,27 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
-  // Messages are hard-coded for testing purposes
-  private ArrayList<String> comments = new ArrayList<String>(
-      Arrays.asList("First comment", "Second comment", "Third comment")
-  );
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<Comment> comments = new ArrayList<>();
+    for (Entity entity: results.asIterable()) {
+      String author = (String) entity.getProperty("author");
+      String email = (String) entity.getProperty("email");
+      Date date = (Date) entity.getProperty("date");
+      String commentText = (String) entity.getProperty("comment");
+
+      Comment comment = new Comment(author, email, date, commentText);
+      comments.add(comment);
+    }
+
     String json = convertArrayListToJson(comments);
     response.setContentType("application/json");
     response.getWriter().println(json);
