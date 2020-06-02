@@ -17,7 +17,7 @@
     <!-- TITLE -->
     <title>Comments on Aradhya's Site</title>
   </head>
-  <body>
+  <body onload="fetchAndInsertDataIntoDOM()">
     <section id="comments">
       <header>
         <h2>Comments</h2>
@@ -62,5 +62,8 @@
         </form>
       </div>
     </section>
+    <!-- SCRIPTS -->
+    <!-- custom script that fetches data from server -->
+    <script src="scripts/comments.js"></script>
   </body>
 </html>
