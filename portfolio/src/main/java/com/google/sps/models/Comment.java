@@ -9,11 +9,11 @@ public class Comment {
   // Author email
   private String email;
   // Post date
-  private Date date;
+  private String date;
   // Text content of comment
   private String comment;
 
-  public Comment(String author, String email, Date date, String comment) {
+  public Comment(String author, String email, String date, String comment) {
     this.author = author;
     this.email = email;
     this.date = date;

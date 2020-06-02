@@ -44,7 +44,7 @@ public final class DataServlet extends HttpServlet {
     for (Entity entity: results.asIterable()) {
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
-      Date date = (Date) entity.getProperty("date");
+      String date = (String) entity.getProperty("date");
       String commentText = (String) entity.getProperty("comment");
 
       Comment comment = new Comment(author, email, date, commentText);
