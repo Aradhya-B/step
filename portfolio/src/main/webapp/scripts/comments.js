@@ -4,7 +4,7 @@
 async function fetchAndInsertDataIntoDOM() {
 	const response = await fetch('/data');
 	const comments = await response.json();
-	const commentsListElement = document.getElementById('comments-list')
+	const commentsListElement = document.getElementById('comments-list');
 	commentsListElement.innerHTML = '';
 	comments.forEach(comment => {
 		commentsListElement.appendChild(
