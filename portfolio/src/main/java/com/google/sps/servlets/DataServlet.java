@@ -46,7 +46,35 @@ public final class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  private String convertArrayListToJson(ArrayList<String> comments) {
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    String author = request.getParameter("comment_author").trim();
+    if (author.isEmpty()) author = "Anonymous";
+
+    String email = request.getParameter("email").trim();
+    if (email.isEmpty()) email = "@";
+
+    String comment = request.getParameter("comment").trim();
+    // Don't add blank comments to Datastore
+    if (comment.isEmpty()) return;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+    Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("author", author);
+    commentEntity.setProperty("email", email);
+    commentEntity.setProperty("comment", comment);
+    commentEntity.setProperty("date", formatter.format(new Date()));
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
+    // Redirect to home after comment is submitted
+    response.sendRedirect("/");
+  }
+
+  private String convertArrayListToJson(ArrayList<Comment> comments) {
     Gson gson = new Gson();
     return gson.toJson(comments);
   }
