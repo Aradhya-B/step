@@ -59,15 +59,15 @@ public final class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    String comment = request.getParameter("comment").trim();
+    // Don't add blank comments to Datastore
+    if (comment.isEmpty()) return;
+
     String author = request.getParameter("comment_author").trim();
     if (author.isEmpty()) author = "Anonymous";
 
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
-
-    String comment = request.getParameter("comment").trim();
-    // Don't add blank comments to Datastore
-    if (comment.isEmpty()) return;
 
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
