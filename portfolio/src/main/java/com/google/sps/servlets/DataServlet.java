@@ -88,8 +88,8 @@ public final class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    // Redirect to home after comment is submitted
-    response.sendRedirect("/");
+    // Refresh after comment is submitted
+    response.sendRedirect("/comments.html");
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
