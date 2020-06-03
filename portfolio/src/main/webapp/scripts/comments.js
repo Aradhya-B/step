@@ -34,6 +34,7 @@ function constructQueryString() {
 function createCommentElement(comment) {
 	const el = document.createElement('div');
 	el.setAttribute("class", "comment");
+	el.setAttribute("id", comment.id);
 
 	let children = [];
 
