@@ -3,7 +3,6 @@
  */
 async function fetchAndInsertDataIntoDOM() {
 	const queryString = constructQueryString();
-	console.log('queryString:', queryString);
 
 	const response = await fetch('/data' + queryString);
 	const comments = await response.json();
