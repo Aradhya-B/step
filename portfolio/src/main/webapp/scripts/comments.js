@@ -2,7 +2,10 @@
  * Fetches data from java servlet and adds it to DOM tree
  */
 async function fetchAndInsertDataIntoDOM() {
-	const response = await fetch('/data');
+	const queryString = constructQueryString();
+	console.log('queryString:', queryString);
+
+	const response = await fetch('/data' + queryString);
 	const comments = await response.json();
 	const commentsListElement = document.getElementById('comments-list');
 	commentsListElement.innerHTML = '';
@@ -13,7 +16,22 @@ async function fetchAndInsertDataIntoDOM() {
 	});
 }
 
-/** Creates a comment element containing */
+/*
+ * Gets query string parameters and constructs query string
+ * to be appended to server calls
+ */
+function constructQueryString() {
+	const urlParams = new URLSearchParams(window.location.search);
+	let queryString = '?';
+	for (const [key, value] of urlParams) {
+		queryString += `${key}=${value}&`;
+	}
+	// Remove extra '&' at end of query string, or '?' if no url params
+	queryString = queryString.slice(0, -1);
+	return queryString;
+}
+
+/** Creates a comment element */
 function createCommentElement(comment) {
 	const el = document.createElement('div');
 	el.setAttribute("class", "comment");
