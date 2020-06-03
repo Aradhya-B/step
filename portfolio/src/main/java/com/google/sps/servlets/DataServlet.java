@@ -43,7 +43,7 @@ public final class DataServlet extends HttpServlet {
 
     String numberOfCommentsString = request.getParameter("number-comments");
     // Set limit on number of comments in results (Default: Display all comments)
-    int limit = numberOfCommentsString == null || numberOfCommentsString.isEmpty() ? Integer.MAX_VALUE : Integer.parseInt(numberOfCommentsString);
+    int limit = getNumberOfComments(numberOfCommentsString);
 
     List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(limit));
 
@@ -90,6 +90,21 @@ public final class DataServlet extends HttpServlet {
 
     // Refresh after comment is submitted
     response.sendRedirect("/comments.html");
+  }
+
+  /*
+   * Gets the number of comments requested based on string parameter.
+   * Defaults to MAX_VALUE if argument is null or empty.
+   * @return requested number of comments.
+   */
+  private int getNumberOfComments(String numberOfCommentsString) {
+    int numComments;
+    if (numberOfCommentsString == null || numberOfCommentsString.isEmpty()) {
+      numComments = Integer.MAX_VALUE;
+    } else {
+      numComments = Integer.parseInt(numberOfCommentsString);
+    }
+    return numComments;
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
