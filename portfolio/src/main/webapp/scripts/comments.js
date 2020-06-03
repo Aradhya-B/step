@@ -16,6 +16,16 @@ async function fetchAndInsertDataIntoDOM() {
 }
 
 /*
+ * Deletes all comments from Datastore and 
+ * calls function to refresh comment page view
+ */
+function deleteAllCommentsFromStorage() {
+	fetch('delete-data', {
+		method: 'POST'
+	}).then(_ => this.fetchAndInsertDataIntoDOM())
+}
+
+/*
  * Gets query string parameters and constructs query string
  * to be appended to server calls
  */

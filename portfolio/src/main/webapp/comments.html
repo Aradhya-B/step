@@ -66,6 +66,11 @@
           type="submit"
           value="View comments" />
       </form>
+      <button type="button"
+          name="delete-button"
+          onclick="deleteAllCommentsFromStorage()">
+        Delete all comments
+      </button>
       <div id="comments-list">
         <!-- dynamically fetches comments from server -->
       </div>
