@@ -34,10 +34,11 @@ import java.text.SimpleDateFormat;
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
@@ -86,7 +87,6 @@ public final class DataServlet extends HttpServlet {
     commentEntity.setProperty("comment", comment);
     commentEntity.setProperty("date", formatter.format(new Date()));
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     // Refresh after comment is submitted
