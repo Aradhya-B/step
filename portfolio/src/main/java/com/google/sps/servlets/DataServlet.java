@@ -98,13 +98,11 @@ public final class DataServlet extends HttpServlet {
    * @return requested number of comments.
    */
   private int getNumberOfComments(String numberOfCommentsString) {
-    int numComments;
     if (numberOfCommentsString == null || numberOfCommentsString.isEmpty()) {
-      numComments = Integer.MAX_VALUE;
+      return Integer.MAX_VALUE;
     } else {
-      numComments = Integer.parseInt(numberOfCommentsString);
+      return Integer.parseInt(numberOfCommentsString);
     }
-    return numComments;
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
