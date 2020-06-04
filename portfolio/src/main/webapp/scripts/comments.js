@@ -22,7 +22,7 @@ async function fetchAndInsertDataIntoDOM() {
 function deleteAllCommentsFromStorage() {
 	fetch('delete-data', {
 		method: 'POST'
-	}).then(_ => this.fetchAndInsertDataIntoDOM())
+	}).then(() => this.fetchAndInsertDataIntoDOM());
 }
 
 /*
