@@ -21,6 +21,19 @@
     <section id="comments">
       <header>
         <h2>Comments</h2>
+        <label for="number-comments">
+          Enter the number of comments to display:
+        </label>
+        <form onsubmit="fetchAndInsertDataIntoDOM()">
+          <input type="number"
+            id="number-comments"
+            name="number-comments"
+            value=""
+            min="0" />
+          <input name="submit"
+            type="submit"
+            value="View comments" />
+        </form>
       </header>
       <div id="comments-list">
         <!-- dynamically fetches comments from server -->
@@ -51,11 +64,6 @@
             tabindex="4" 
             required="required"></textarea>
 
-          <!-- comment_post_ID value hard-coded as 1 -->
-          <input type="hidden" 
-            name="comment_post_ID" 
-            value="1" 
-            id="comment_post_ID" />
           <input name="submit" 
             type="submit" 
             value="Submit comment" />

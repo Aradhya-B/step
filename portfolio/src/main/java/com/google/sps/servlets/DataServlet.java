@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.gson.Gson;
 import com.google.sps.models.Comment;
 import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
@@ -35,13 +36,20 @@ public final class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
+    String numberOfCommentsString = request.getParameter("number-comments");
+    // Set limit on number of comments in results (Default: Display all comments)
+    int limit = getNumberOfComments(numberOfCommentsString);
+
+    List<Entity> limitedResults = results.asList(FetchOptions.Builder.withLimit(limit));
+
     ArrayList<Comment> comments = new ArrayList<>();
-    for (Entity entity: results.asIterable()) {
+    for (Entity entity: limitedResults) {
+
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
       String date = (String) entity.getProperty("date");
@@ -80,8 +88,21 @@ public final class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    // Redirect to home after comment is submitted
-    response.sendRedirect("/");
+    // Refresh after comment is submitted
+    response.sendRedirect("/comments.html");
+  }
+
+  /*
+   * Gets the number of comments requested based on string parameter.
+   * Defaults to MAX_VALUE if argument is null or empty.
+   * @return requested number of comments.
+   */
+  private int getNumberOfComments(String numberOfCommentsString) {
+    if (numberOfCommentsString == null || numberOfCommentsString.isEmpty()) {
+      return Integer.MAX_VALUE;
+    } else {
+      return Integer.parseInt(numberOfCommentsString);
+    }
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
