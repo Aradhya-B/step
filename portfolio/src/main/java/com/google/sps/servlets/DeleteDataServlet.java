@@ -33,6 +33,8 @@ import java.util.*;
 @WebServlet("/delete-data")
 public final class DeleteDataServlet extends HttpServlet {
 
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -50,14 +52,12 @@ public final class DeleteDataServlet extends HttpServlet {
   private void deleteCommentById(String idString) {
     long id = Long.parseLong(idString);
     Key commentKey = KeyFactory.createKey("Comment", id);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.delete(commentKey);
   }
 
   private void deleteAllComments() {
     Query query = new Query("Comment");
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
