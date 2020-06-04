@@ -26,6 +26,15 @@ function deleteAllCommentsFromStorage() {
 }
 
 /*
+ * Deletes a single comment from Datastore by id
+ */
+function deleteCommentFromStorageById(id) {
+	fetch(`delete-data?id=${id}`, {
+		method: 'POST'
+	}).then(() => this.fetchAndInsertDataIntoDOM());
+}
+
+/*
  * Gets query string parameters and constructs query string
  * to be appended to server calls
  */
