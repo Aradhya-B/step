@@ -16,6 +16,16 @@ async function fetchAndInsertDataIntoDOM() {
 }
 
 /*
+ * Deletes all comments from Datastore and 
+ * calls function to refresh comment page view
+ */
+function deleteAllCommentsFromStorage() {
+	fetch('delete-data', {
+		method: 'POST'
+	}).then(() => this.fetchAndInsertDataIntoDOM());
+}
+
+/*
  * Gets query string parameters and constructs query string
  * to be appended to server calls
  */
@@ -34,6 +44,7 @@ function constructQueryString() {
 function createCommentElement(comment) {
 	const el = document.createElement('div');
 	el.setAttribute("class", "comment");
+	el.setAttribute("id", comment.id);
 
 	let children = [];
 

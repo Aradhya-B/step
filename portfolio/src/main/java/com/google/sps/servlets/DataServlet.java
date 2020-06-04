@@ -50,12 +50,13 @@ public final class DataServlet extends HttpServlet {
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity: limitedResults) {
 
+      long id = entity.getKey().getId();
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
       String date = (String) entity.getProperty("date");
       String commentText = (String) entity.getProperty("comment");
 
-      Comment comment = new Comment(author, email, date, commentText);
+      Comment comment = new Comment(id, author, email, date, commentText);
       comments.add(comment);
     }
 
