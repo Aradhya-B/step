@@ -39,7 +39,10 @@ public final class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
+    String sortDirectionString = request.getParameter("sort");
+    SortDirection sortDirection = getSortDirection(sortDirectionString);
+
+    Query query = new Query("Comment").addSort("date", sortDirection);
     PreparedQuery results = datastore.prepare(query);
 
     String numberOfCommentsString = request.getParameter("number-comments");
@@ -79,7 +82,7 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
@@ -106,6 +109,20 @@ public final class DataServlet extends HttpServlet {
       numComments = Integer.parseInt(numberOfCommentsString);
     }
     return numComments;
+  }
+
+  /*
+   * Gets the direction comments should be sorted by based on string parameter.
+   * Defaults to DESCENDING (newest first) if argument is null or empty.
+   * @return sort direction
+   */
+  private SortDirection getSortDirection(String sortDirectionString) {
+    System.out.println("Sort Direction String: " + sortDirectionString);
+    if (sortDirectionString == null || sortDirectionString.isEmpty() || sortDirectionString.equals("newest")) {
+      return SortDirection.DESCENDING;
+    } else {
+      return SortDirection.ASCENDING;
+    }
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
