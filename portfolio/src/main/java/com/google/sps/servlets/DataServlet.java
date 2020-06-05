@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
@@ -82,13 +84,12 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
-
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("comment", comment);
-    commentEntity.setProperty("date", formatter.format(new Date()));
+    // Subtract 4 hours to show EST time because local is not Eastern
+    commentEntity.setProperty("date", LocalDateTime.now().minusHours(4).format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss")));
 
     datastore.put(commentEntity);
 
