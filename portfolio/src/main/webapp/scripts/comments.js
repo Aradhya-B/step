@@ -60,24 +60,30 @@ function createCommentElement(comment) {
 	const dateEl = document.createElement("span");
 	dateEl.innerText = comment.date;
 	dateEl.setAttribute("class", "date");
-	children.push(dateEl);
 
 	const authorEl = document.createElement("a");
 	authorEl.innerText = comment.author;
 	authorEl.setAttribute("href", `mailto:${comment.email}`);
 	authorEl.setAttribute("class", "author");
-	children.push(authorEl);
+
+	const deleteEl = document.createElement("img");
+	deleteEl.setAttribute("class", "trash");
+	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${comment.id})`);
+	deleteEl.setAttribute("src", "images/icons/trash.svg");
+
+	const authorDateDeleteContainer = document.createElement("div");
+	authorDateDeleteContainer.appendChild(authorEl);
+	authorDateDeleteContainer.appendChild(deleteEl);
+	authorDateDeleteContainer.appendChild(dateEl);
+	children.push(authorDateDeleteContainer);
 
 	const textEl = document.createElement("p");
 	textEl.innerText = comment.comment;
 	textEl.setAttribute("class", "comment-text");
 	children.push(textEl);
 
-	const deleteEl = document.createElement("img");
-	deleteEl.setAttribute("class", "trash");
-	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${comment.id})`);
-	deleteEl.setAttribute("src", "images/icons/trash.svg");
-	children.push(deleteEl);
+	const lineBreak = document.createElement("hr");
+	children.push(lineBreak);
 
 	children.forEach(child => el.appendChild(child));
 	return el;
