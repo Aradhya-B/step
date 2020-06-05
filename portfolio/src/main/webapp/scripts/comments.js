@@ -26,6 +26,15 @@ function deleteAllCommentsFromStorage() {
 }
 
 /*
+ * Deletes a single comment from Datastore by id
+ */
+function deleteCommentFromStorageById(id) {
+	fetch(`delete-data?id=${id}`, {
+		method: 'POST'
+	}).then(() => this.fetchAndInsertDataIntoDOM());
+}
+
+/*
  * Gets query string parameters and constructs query string
  * to be appended to server calls
  */
@@ -63,6 +72,12 @@ function createCommentElement(comment) {
 	textEl.innerText = comment.comment;
 	textEl.setAttribute("class", "comment-text");
 	children.push(textEl);
+
+	const deleteEl = document.createElement("img");
+	deleteEl.setAttribute("class", "trash");
+	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${comment.id})`);
+	deleteEl.setAttribute("src", "images/icons/trash.svg");
+	children.push(deleteEl);
 
 	children.forEach(child => el.appendChild(child));
 	return el;

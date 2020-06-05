@@ -58,7 +58,7 @@ main {
   cursor: pointer;
   transition: all .2s ease-in-out;
   /* adds a green filter to all icons to match page design */
-  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85)
+  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85);
 }
 
 .icon:hover {
@@ -154,6 +154,7 @@ footer {
 }
 
 .comment {
+  margin-top: 20px;
   margin-left: 40px;
   margin-right: 40px;
 }
@@ -168,6 +169,16 @@ footer {
 
 .comment-text {
   display: block;
+}
+
+.trash {
+  width: 1.2em;
+  height: auto;
+}
+
+.trash:hover {
+  cursor: pointer;
+  filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85);
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
