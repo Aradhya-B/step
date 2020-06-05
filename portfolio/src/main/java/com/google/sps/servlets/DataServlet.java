@@ -117,7 +117,6 @@ public final class DataServlet extends HttpServlet {
    * @return sort direction
    */
   private SortDirection getSortDirection(String sortDirectionString) {
-    System.out.println("Sort Direction String: " + sortDirectionString);
     if (sortDirectionString == null || sortDirectionString.isEmpty() || sortDirectionString.equals("newest")) {
       return SortDirection.DESCENDING;
     } else {
