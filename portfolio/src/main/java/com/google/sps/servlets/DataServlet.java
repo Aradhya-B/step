@@ -120,9 +120,9 @@ public final class DataServlet extends HttpServlet {
   private SortDirection getSortDirection(String sortDirectionString) {
     if (sortDirectionString == null || sortDirectionString.isEmpty() || sortDirectionString.equals("newest")) {
       return SortDirection.DESCENDING;
-    } else {
-      return SortDirection.ASCENDING;
-    }
+    } 
+
+    return SortDirection.ASCENDING;
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {
