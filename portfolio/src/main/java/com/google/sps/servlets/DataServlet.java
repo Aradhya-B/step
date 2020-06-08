@@ -32,6 +32,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.lang.*;
 
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
@@ -44,7 +45,7 @@ public final class DataServlet extends HttpServlet {
     String sortDirectionString = request.getParameter("sort");
     SortDirection sortDirection = getSortDirection(sortDirectionString);
 
-    Query query = new Query("Comment").addSort("date", sortDirection);
+    Query query = new Query("Comment").addSort("time", sortDirection);
     PreparedQuery results = datastore.prepare(query);
 
     String numberOfCommentsString = request.getParameter("number-comments");
@@ -59,10 +60,10 @@ public final class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
-      String date = (String) entity.getProperty("date");
+      long time = (long) entity.getProperty("time");
       String commentText = (String) entity.getProperty("comment");
 
-      Comment comment = new Comment(id, author, email, date, commentText);
+      Comment comment = new Comment(id, author, email, time, commentText);
       comments.add(comment);
     }
 
@@ -88,8 +89,8 @@ public final class DataServlet extends HttpServlet {
     commentEntity.setProperty("author", author);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("comment", comment);
-    // Subtract 4 hours to show EST time because local is not Eastern
-    commentEntity.setProperty("date", LocalDateTime.now().minusHours(4).format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm:ss")));
+    // Get current epoch seconds
+    commentEntity.setProperty("time", System.currentTimeMillis() / 1000);
 
     datastore.put(commentEntity);
 
