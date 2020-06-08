@@ -10,16 +10,16 @@ public class Comment {
   private String author;
   // Author email
   private String email;
-  // Post date
-  private String date;
+  // Post time
+  private long time;
   // Text content of comment
   private String comment;
 
-  public Comment(long id, String author, String email, String date, String comment) {
+  public Comment(long id, String author, String email, long time, String comment) {
     this.id = id;
     this.author = author;
     this.email = email;
-    this.date = date;
+    this.time = time;
     this.comment = comment;
   }
 }

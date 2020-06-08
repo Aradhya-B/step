@@ -30,15 +30,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.lang.*;
 
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
+  private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Query query = new Query("Comment").addSort("date", SortDirection.DESCENDING);
+    String sortDirectionString = request.getParameter("sort");
+    SortDirection sortDirection = getSortDirection(sortDirectionString);
+
+    Query query = new Query("Comment").addSort("time", sortDirection);
     PreparedQuery results = datastore.prepare(query);
 
     String numberOfCommentsString = request.getParameter("number-comments");
@@ -53,10 +60,10 @@ public final class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
-      String date = (String) entity.getProperty("date");
+      long time = (long) entity.getProperty("time");
       String commentText = (String) entity.getProperty("comment");
 
-      Comment comment = new Comment(id, author, email, date, commentText);
+      Comment comment = new Comment(id, author, email, time, commentText);
       comments.add(comment);
     }
 
@@ -78,15 +85,13 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("comment", comment);
-    commentEntity.setProperty("date", formatter.format(new Date()));
+    // Get current epoch seconds
+    commentEntity.setProperty("time", System.currentTimeMillis() / 1000);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
     // Refresh after comment is submitted
@@ -104,6 +109,19 @@ public final class DataServlet extends HttpServlet {
     } else {
       return Integer.parseInt(numberOfCommentsString);
     }
+  }
+
+  /*
+   * Gets the direction comments should be sorted by based on string parameter.
+   * Defaults to DESCENDING (newest first) if argument is null or empty.
+   * @return sort direction
+   */
+  private SortDirection getSortDirection(String sortDirectionString) {
+    if (sortDirectionString == null || sortDirectionString.isEmpty() || sortDirectionString.equals("newest")) {
+      return SortDirection.DESCENDING;
+    } 
+
+    return SortDirection.ASCENDING;
   }
 
   private String convertArrayListToJson(ArrayList<Comment> comments) {

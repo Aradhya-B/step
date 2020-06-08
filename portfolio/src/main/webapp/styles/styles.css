@@ -32,6 +32,10 @@ main {
   margin: 0;
 }
 
+#noun {
+  color: #747474;
+}
+
 .content-main {
   /* initially hidden with 0 opacity
    * revealed after typing animation completion
@@ -131,8 +135,14 @@ footer {
   transition: opacity 1s linear;
 }
 
+.comment-header {
+  font-size: 1.5em;
+  color: #0c8716;
+  font-weight: bold;
+}
+
 #respond {
-  margin: 40px;
+  margin: 1em;
 }
 
 #respond input[type='text'],
@@ -142,7 +152,7 @@ footer {
   display: block;
   width: 100%;
 
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #0c8716;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -153,32 +163,122 @@ footer {
   line-height: 1.4em;
 }
 
+.submit {
+  padding: 0.5em;
+  color: #0c8716;
+  font-weight: bold;
+}
+
+.submit:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: #0c8716;
+}
+
+#comment-filter {
+  display: flex;
+  flex-direction: row;
+  margin: 1em 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+#comment-filter-form {
+  margin-left: auto;
+}
+
+#comments-list {
+  list-style: none;
+  margin: 1em 1em;
+  border-style: solid;
+  border-color: #0c8716;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+}
+
+select {
+  color: #0c8716;
+  font-weight: bold;
+  padding: 0.5em;
+}
+
 .comment {
-  margin-top: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1em 1em;
+
+  border-radius: 10px;
+  -mox-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
 
 .date {
-  display: block;
+  float: right;
 }
 
 .author {
-  display: block;
+  float: left;
+  color: #747474;
+  text-decoration: none;
+}
+
+.author:hover {
+  color: #0c8716;
 }
 
 .comment-text {
-  display: block;
+  word-break: break-all;
 }
 
 .trash {
   width: 1.2em;
   height: auto;
+  float: right;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .trash:hover {
   cursor: pointer;
   filter: invert(0.4) sepia(1) saturate(20) hue-rotate(57.6deg) brightness(0.85);
+}
+
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  height: 1px;
+  background-color: #0c8716;
+}
+
+#delete-button {
+  margin: 1em 1em;
+  font-weight: bold;
+  padding: 0.5em;
+  color: #0c8716;
+}
+
+#delete-button:hover {
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: #0c8716;
+}
+
+#home {
+  text-decoration: none;
+  color: #747474;
+  font-size: 1em;
+}
+
+#home:hover {
+  color: #0c8716;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */

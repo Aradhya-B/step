@@ -10,6 +10,11 @@
     />
     <!-- STYLESHEETS -->
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <!-- css animation library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
     <!-- METADATA -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aradhya's Website" />
@@ -20,12 +25,10 @@
   <body onload="fetchAndInsertDataIntoDOM()">
     <section id="comments">
       <header>
-        <h2>Comments</h2>
       </header>
       <div id="respond">
-        <h3>Submit a comment!</h3>
+        <p class="comment-header">~submit a comment~</p>
         <form action="/data" method="post" onsubmit="fetchAndInsertDataIntoDOM()" id="comment-form">
-
           <label for="comment-author" class="required">Your name</label>
           <input type="text" 
             name="comment_author" 
@@ -49,33 +52,63 @@
             required="required"></textarea>
 
           <input name="submit" 
+            class="submit"
             type="submit" 
             value="Submit comment" />
         </form>
       </div>
-      <form onsubmit="fetchAndInsertDataIntoDOM()">
-        <label for="number-comments">
-          Enter the number of comments to display:
-        </label>
-        <input type="number"
-          id="number-comments"
-          name="number-comments"
-          value=""
-          min="0" />
-        <input name="submit"
-          type="submit"
-          value="View comments" />
-      </form>
-      <button type="button"
+      <div id="comment-filter">
+        <p class="comment-header">~comments~</p>
+        <form id="comment-filter-form" onsubmit="fetchAndInsertDataIntoDOM()">
+          <label for="number-comments">
+            Comments shown:
+          </label>
+          <select id="number-comments"
+            name="number-comments"
+            value=""
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+          <label for="sort">
+            Sort by:
+          </label>
+          <select id="sort"
+            name="sort"
+            value=""
+          >
+            <option value="" disabled selected>Select</option>
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+          <input name="submit"
+            class="submit"
+            type="submit"
+            value="View comments" />
+        </form>
+      </div>
+      <div id="comments-list">
+        <!-- dynamically fetches comments from server -->
+      </div>
+      <button id="delete-button" 
+          type="button"
           name="delete-button"
           onclick="deleteAllCommentsFromStorage()">
         Delete all comments
       </button>
-      <div id="comments-list">
-        <!-- dynamically fetches comments from server -->
-      </div>
+      <footer style="opacity: 1;">
+      </footer>
     </section>
     <!-- SCRIPTS -->
+    <!-- get reusable header element -->
+    <script src="scripts/header.js"></script>
+    <!-- get reusable footer element -->
+    <script src="scripts/footer.js"></script>
     <!-- custom script that fetches data from server -->
     <script src="scripts/comments.js"></script>
   </body>
