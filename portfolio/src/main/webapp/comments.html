@@ -24,6 +24,8 @@
   </head>
   <body onload="fetchAndInsertDataIntoDOM()">
     <section id="comments">
+      <header>
+      </header>
       <div id="respond">
         <p class="comment-header">~submit a comment~</p>
         <form action="/data" method="post" onsubmit="fetchAndInsertDataIntoDOM()" id="comment-form">
@@ -103,6 +105,8 @@
       </footer>
     </section>
     <!-- SCRIPTS -->
+    <!-- get reusable header element -->
+    <script src="scripts/header.js"></script>
     <!-- get reusable footer element -->
     <script src="scripts/footer.js"></script>
     <!-- custom script that fetches data from server -->
