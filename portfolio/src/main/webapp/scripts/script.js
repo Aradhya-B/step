@@ -3,12 +3,10 @@
  */
 const options = {
 	strings: [
-		'Who the <strong>fork</strong> is Aradhya?',
-		'Let\'s check the dictionary.',
-		'^500 aradhya ▪ <em>noun</em> ^500'
+		'aradhya ^500 <em id="noun">(noun)</em>'
 	],
-	typeSpeed: 35,
-	backSpeed: 35,
+	typeSpeed: 30,
+	backSpeed: 30,
 	backDelay: 500,
 	showCursor: false,
 	/*

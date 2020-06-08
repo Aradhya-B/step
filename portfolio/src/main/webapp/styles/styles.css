@@ -32,6 +32,10 @@ main {
   margin: 0;
 }
 
+#noun {
+  color: #747474;
+}
+
 .content-main {
   /* initially hidden with 0 opacity
    * revealed after typing animation completion
