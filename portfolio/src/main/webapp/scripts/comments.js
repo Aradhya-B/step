@@ -58,7 +58,9 @@ function createCommentElement(comment) {
 	let children = [];
 
 	const dateEl = document.createElement("span");
-	dateEl.innerText = comment.date;
+	const date = new Date(0);
+	date.setUTCSeconds(parseInt(comment.time));
+	dateEl.innerText = date;
 	dateEl.setAttribute("class", "date");
 
 	const authorEl = document.createElement("a");
