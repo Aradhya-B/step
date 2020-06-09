@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="map">
   <head>
     <meta charset="utf-8">
     <!-- STYLESHEETS -->
@@ -9,19 +9,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
     />
+    <!--
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-    </style>
+    </style>-->
     <!-- METADATA -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aradhya's Website" />
@@ -29,14 +24,14 @@
     <!-- TITLE -->
     <title>Map of Patents</title>
   </head>
-  <body>
-    <header style="padding: 10px">
+  <body class="map">
+    <header>
     </header>
     <h1 id="map-title">
       Patents Filed in Canada in the Year 2000
     </h1>
     <div id="map"></div>
-    <footer style="opacity: 1; margin: 1em;">
+    <footer style="opacity: 1">
     </footer>
     <script src="scripts/maps.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCob9uFmq2Kme_0ym7BYomID1W16R7MzR4&callback=createPatentFilingMap&region=CA"
