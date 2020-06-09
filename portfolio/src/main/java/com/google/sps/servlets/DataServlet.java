@@ -61,12 +61,13 @@ public final class DataServlet extends HttpServlet {
     for (Entity entity: limitedResults) {
 
       long id = entity.getKey().getId();
+      double score = (double) entity.getProperty("score");
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
       long time = (long) entity.getProperty("time");
       String commentText = (String) entity.getProperty("comment");
 
-      Comment comment = new Comment(id, author, email, time, commentText);
+      Comment comment = new Comment(id, score, author, email, time, commentText);
       comments.add(comment);
     }
 
@@ -88,10 +89,17 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
+    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    double score = sentiment.getScore();
+    languageService.close();
+
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("comment", comment);
+    commentEntity.setProperty("score", score);
     // Get current epoch seconds
     commentEntity.setProperty("time", System.currentTimeMillis() / 1000);
 
