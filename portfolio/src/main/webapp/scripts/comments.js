@@ -73,11 +73,16 @@ function createCommentElement(comment) {
 	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${comment.id})`);
 	deleteEl.setAttribute("src", "images/icons/trash.svg");
 
-	const authorDateDeleteContainer = document.createElement("div");
-	authorDateDeleteContainer.appendChild(authorEl);
-	authorDateDeleteContainer.appendChild(deleteEl);
-	authorDateDeleteContainer.appendChild(dateEl);
-	children.push(authorDateDeleteContainer);
+	const scoreEl = document.createElement("span");
+	const score = comment.score.toFixed(2);
+	scoreEl.innerText = `Sentiment: ${score}`;
+
+	const authorDateDeleteScoreContainer = document.createElement("div");
+	authorDateDeleteScoreContainer.appendChild(authorEl);
+	authorDateDeleteScoreContainer.appendChild(deleteEl);
+	authorDateDeleteScoreContainer.appendChild(dateEl);
+	authorDateDeleteScoreContainer.appendChild(scoreEl);
+	children.push(authorDateDeleteScoreContainer);
 
 	const textEl = document.createElement("p");
 	textEl.innerText = comment.comment;
