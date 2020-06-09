@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <!-- STYLESHEETS -->
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
     <!-- css animation library -->
     <link
@@ -23,23 +22,24 @@
         padding: 0;
       }
     </style>
+    <!-- METADATA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aradhya's Website" />
+    <meta name="theme-color" content="#000000" />
+    <!-- TITLE -->
+    <title>Map of Patents</title>
   </head>
   <body>
-    <header>
+    <header style="padding: 10px">
     </header>
+    <h1 id="map-title">
+      Patents Filed in Canada in the Year 2000
+    </h1>
     <div id="map"></div>
     <footer style="opacity: 1; margin: 1em;">
     </footer>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCob9uFmq2Kme_0ym7BYomID1W16R7MzR4&callback=initMap"
+    <script src="scripts/maps.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCob9uFmq2Kme_0ym7BYomID1W16R7MzR4&callback=createPatentFilingMap&region=CA"
     async defer></script>
     <script src="scripts/header.js"></script>
     <script src="scripts/footer.js"></script>
