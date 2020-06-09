@@ -77,6 +77,11 @@ function createCommentElement(comment) {
 	const score = comment.score.toFixed(2);
 	scoreEl.innerText = `Sentiment: ${score}`;
 
+	// Set class based on score -> The higher, the more "positive"
+	if (score >= 0.33) scoreEl.setAttribute("class", "score positive")
+	else if (score >= -0.66) scoreEl.setAttribute("class", "score neutral")
+	else scoreEl.setAttribute("class", "score negative");
+
 	const authorDateDeleteScoreContainer = document.createElement("div");
 	authorDateDeleteScoreContainer.appendChild(authorEl);
 	authorDateDeleteScoreContainer.appendChild(deleteEl);
