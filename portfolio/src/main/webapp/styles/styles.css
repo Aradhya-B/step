@@ -281,6 +281,13 @@ hr {
   color: #0c8716;
 }
 
+#map-title {
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
+  color: #0c8716;
+}
+
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
   main {   
