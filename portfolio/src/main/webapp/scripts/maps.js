@@ -1,3 +1,4 @@
+
 /** Fetches patent filing data from the server and displays it in a map. */
 function createPatentFilingMap() {
   fetch('/patent-data').then(response => response.json()).then((patentFilings) => {
@@ -136,13 +137,13 @@ function createPatentFilingMap() {
 			},
 			map: map
 		});
-		const infowindow = new google.maps.InfoWindow({
+		const infoWindow = new google.maps.InfoWindow({
 			content: patentInfoBoxCreator(patentFiling.date),
 			maxWidth: 200
 		});
 		// Create Info window
 		marker.addListener('click', function() {
-			infowindow.open(map, marker);
+			infoWindow.open(map, marker);
 		});
      });
   });
