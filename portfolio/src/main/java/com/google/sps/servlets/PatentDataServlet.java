@@ -16,6 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 public class PatentDataServlet extends HttpServlet {
 
   private Collection<PatentFiling> patentFilings;
+  private enum Indices {
+    DATE(4), LAT(5), LNG(6);
+
+    private final int index;
+    Indices(int index) { this.index = index; }
+    public int getValue() { return index; }
+  }
 
   @Override
   public void init() {
@@ -29,9 +36,9 @@ public class PatentDataServlet extends HttpServlet {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
 
-      String date = cells[4];
-      double lat = Double.parseDouble(cells[5]);
-      double lng = Double.parseDouble(cells[6]);
+      String date = cells[Indices.DATE];
+      double lat = Double.parseDouble(cells[Indices.LAT]);
+      double lng = Double.parseDouble(cells[Indices.LNG]);
 
       patentFilings.add(new PatentFiling(date, lat, lng));
     }
