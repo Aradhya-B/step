@@ -36,9 +36,9 @@ public class PatentDataServlet extends HttpServlet {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
 
-      String date = cells[Indices.DATE];
-      double lat = Double.parseDouble(cells[Indices.LAT]);
-      double lng = Double.parseDouble(cells[Indices.LNG]);
+      String date = cells[Indices.DATE.getValue()];
+      double lat = Double.parseDouble(cells[Indices.LAT.getValue()]);
+      double lng = Double.parseDouble(cells[Indices.LNG.getValue()]);
 
       patentFilings.add(new PatentFiling(date, lat, lng));
     }
