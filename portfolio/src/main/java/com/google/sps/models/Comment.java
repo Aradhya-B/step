@@ -6,6 +6,8 @@ import java.util.Date;
 public class Comment {
   // Comment id
   private long id;
+  // Comment score
+  private double score;
   // Comment author
   private String author;
   // Author email
@@ -15,8 +17,9 @@ public class Comment {
   // Text content of comment
   private String comment;
 
-  public Comment(long id, String author, String email, long time, String comment) {
+  public Comment(long id, double score, String author, String email, long time, String comment) {
     this.id = id;
+    this.score = score;
     this.author = author;
     this.email = email;
     this.time = time;
