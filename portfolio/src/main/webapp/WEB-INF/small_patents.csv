@@ -1,0 +1,10 @@
+,appln_id,patent_office,filing_date,lat,lng,ctry_code,name_0,name_1,name_2,name_3,name_4,name_5,city,coord_source,source,type
+1243842,12914237,DE,2000-01-01,48.0089,11.1757,DE,Germany,Bayern,Starnberg,Herrsching a. Ammersee,Herrsching a. Ammersee,,Herrsching a. Ammersee,geolocalization,1,priority
+282041,6531732,CN,2000-01-01,43.8043,87.5825,CN,China,Xinjiang Uygur,Ürümqi,Ürümqi Xiàn,,,Ürümqi,geolocalization,4,single
+282042,6531733,CN,2000-01-01,23.1225,113.258,CN,China,Guangdong,Guangzhou,Guangzhou,,,Guangzhou,geolocalization,4,single
+290113,6543682,CN,2000-01-01,30.5807,114.262,CN,China,Hubei,Wuhan,Wuhan,,,Wuhan,geolocalization,4,single
+282044,6531735,CN,2000-01-01,30.0234,120.574,CN,China,Zhejiang,Shaoxing,Shaoxing,,,Shaoxing,geolocalization,4,priority
+282045,6531736,CN,2000-01-01,23.0829,114.432,CN,China,Guangdong,Huizhou,Huizhou,,,Huizhou,geolocalization,4,single
+282091,6531782,CN,2000-01-01,25.0689,117.01100000000001,CN,China,Fujian,Longyan,Luojiang,,,Longyan,geolocalization,4,single
+20100588,54901619,ZA,2000-01-01,35.2087,-80.7808,US,United States,North Carolina,Mecklenburg,,,,Mecklenburg,geolocalization,3,tech_rel
+20100589,54901619,ZA,2000-01-01,51.1698,13.5988,DE,Germany,Sachsen,Meißen,Weinböhla,Weinböhla,,Weinböhla,geolocalization,3,tech_rel

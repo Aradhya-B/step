@@ -77,7 +77,7 @@ main {
 }
 
 .list > li {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .baffle {
@@ -131,6 +131,7 @@ img {
 
 footer {
   text-align: center;
+  margin: 1em;
   opacity: 0;
   transition: opacity 1s linear;
 }
@@ -272,12 +273,30 @@ hr {
 }
 
 #home {
+  padding: 1em;
   text-decoration: none;
   color: #747474;
   font-size: 1em;
 }
 
 #home:hover {
+  color: #0c8716;
+}
+
+.map {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+}
+
+#map-title {
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
   color: #0c8716;
 }
 

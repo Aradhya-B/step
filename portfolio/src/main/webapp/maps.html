@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html class="map">
+  <head>
+    <meta charset="utf-8">
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <!-- css animation library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
+    <!-- METADATA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aradhya's Website" />
+    <meta name="theme-color" content="#000000" />
+    <!-- TITLE -->
+    <title>Map of Patents</title>
+  </head>
+  <body class="map">
+    <header>
+    </header>
+    <h1 id="map-title">
+      Patents Filed in Canada in the Year 2000
+    </h1>
+    <div id="map"></div>
+    <footer style="opacity: 1">
+    </footer>
+    <script src="scripts/maps.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCob9uFmq2Kme_0ym7BYomID1W16R7MzR4&callback=createPatentFilingMap&region=CA"
+    async defer></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/footer.js"></script>
+  </body>
+</html>
