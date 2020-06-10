@@ -15,7 +15,7 @@ class Snake {
 	 * @param {number} green RGB code (0 - 255)
 	 * @param {number} blue RGB code (0 - 255)
 	 */
-	constructor(x, y, xConstraint1, xConstraint2, yConstraint1, yConstraint2, gridScale, red, green, blue) {
+	constructor({x, y, xConstraint1, xConstraint2, yConstraint1, yConstraint2, gridScale, red, green, blue}) {
 		// The snake is not moving upon initialization
 		// @private {number} Snake speed in the x-direction
 		this.xSpeed = 0;
