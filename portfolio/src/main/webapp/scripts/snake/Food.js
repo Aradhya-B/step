@@ -11,7 +11,7 @@ class Food {
 	 * @param {number} gridScale Scale of game grid that food will be rendered on
 	 * @param {number} section Which section of 4-way segmented game grid this food should be rendered on
 	 */
-	constructor(xConstraint1, xConstraint2, yConstraint1, yConstraint2, gridScale, section) {
+	constructor({xConstraint1, xConstraint2, yConstraint1, yConstraint2, gridScale, section}) {
 		this.xConstraint1 = xConstraint1;
 		this.xConstraint2 = xConstraint2;
 		this.yConstraint1 = yConstraint1;
