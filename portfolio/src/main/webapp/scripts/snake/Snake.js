@@ -72,7 +72,7 @@ class Snake {
 	 */
 	eat(foodX, foodY) {
 		const distanceFromFood = dist(this.x, this.y, foodX, foodY);
-		if (distanceFromFood < 10) {
+		if (distanceFromFood < 5) {
 			this.total++;
 			return true;
 		}
