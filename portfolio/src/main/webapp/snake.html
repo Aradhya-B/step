@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="snake">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/icons/favicon.png" />
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="styles/styles.css" />
+    <!-- SCRIPTS -->
+    <script language="javascript" src="scripts/snake/p5/p5.js"></script>
+    <script language="javascript" src="scripts/snake/Food.js"></script>
+    <script language="javascript" src="scripts/snake/Snake.js"></script>
+    <script language="javascript" src="scripts/snake/sketch.js"></script>
+    <title>4-Snake</title>
+  </head>
+  <body class="snake">
+    <div class="box">
+      <div class="header">
+        <h1>4-Snake</h1>
+        <div id="diff-and-score">
+          <select id="game-difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="insane">Insane</option>
+          </select>
+          <h2 id="score">Score:</h2>
+        </div>
+      </div>
+      <div id="canvas-container">
+        <!-- To put p5 canvas-->
+      </div>
+    </div>
+  </body>
+</html>
