@@ -3,6 +3,7 @@
  * on section number and passed coordinate constraints. Rendered based on the grid's scale.
  */
 class Food {
+<<<<<<< HEAD
     /**
      * @param {number} xConstraint1 First x-coordinate constraint
      * @param {number} xConstraint2 Second x-coordinate constraint
@@ -18,6 +19,23 @@ class Food {
         this.yConstraint2 = yConstraint2;
         this.gridScale = gridScale;
         this.section = section;
+=======
+    /**
+     * @param {number} xConstraint1 First x-coordinate constraint
+     * @param {number} xConstraint2 Second x-coordinate constraint
+     * @param {number} yConstraint1 First y-coordinate constraint
+     * @param {number} yConstraint2 Second y-coordinate constraint
+     * @param {number} gridScale Scale of game grid that food will be rendered on
+     * @param {number} section Which section of 4-way segmented game grid this food should be rendered on
+     */
+    constructor({xConstraint1, xConstraint2, yConstraint1, yConstraint2, gridScale, section}) {
+        this.xConstraint1 = xConstraint1;
+        this.xConstraint2 = xConstraint2;
+        this.yConstraint1 = yConstraint1;
+        this.yConstraint2 = yConstraint2;
+        this.gridScale = gridScale;
+        this.section = section;
+>>>>>>> Change positional parameters to named parameters in Food class
 
         /** @private {number} X-coordinate */
         this.x = this.setXLocation();
