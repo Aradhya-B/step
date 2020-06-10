@@ -79,7 +79,7 @@ function createCommentElement(comment) {
 
 	// Set class based on score -> The higher, the more "positive"
 	if (score >= 0.33) scoreEl.setAttribute("class", "score positive")
-	else if (score >= -0.66) scoreEl.setAttribute("class", "score neutral")
+	else if (score >= -0.33) scoreEl.setAttribute("class", "score neutral")
 	else scoreEl.setAttribute("class", "score negative");
 
 	const authorDateDeleteScoreContainer = document.createElement("div");
