@@ -1,5 +1,5 @@
 /**
- * Model for food in basic snake game. Constrained to certain coordinates on p5 canvas based
+ * Model for food in 4-Snake game. Constrained to certain coordinates on p5 canvas based
  * on section number and passed coordinate constraints. Rendered based on the grid's scale.
  */
 class Food {
