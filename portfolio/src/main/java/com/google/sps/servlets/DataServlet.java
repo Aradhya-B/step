@@ -114,9 +114,8 @@ public final class DataServlet extends HttpServlet {
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    double score = sentiment.getScore();
     languageService.close();
-    return score;
+    return sentiment.getScore();
   }
 
   /*
