@@ -110,9 +110,9 @@ public final class DataServlet extends HttpServlet {
    * the Google Natural Language AP.
    * @return sentiment score for comment.
    */
-  private double getSentimentScore(String comment) {
-    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
+  private double getSentimentScore(String comment) throws IOException {
     LanguageServiceClient languageService = LanguageServiceClient.create();
+    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     double score = sentiment.getScore();
     languageService.close();
