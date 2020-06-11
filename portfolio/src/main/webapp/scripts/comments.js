@@ -57,41 +57,14 @@ function createCommentElement(comment) {
 
 	let children = [];
 
-	const dateEl = document.createElement("span");
-	const date = new Date(0);
-	date.setUTCSeconds(parseInt(comment.time));
-	dateEl.innerText = date;
-	dateEl.setAttribute("class", "date");
+	const dateEl = createDateElement(comment.time);
+	const authorEl = createAuthorElement(comment.email, comment.author);
+	const deleteEl = createDeleteElement(comment.id);
+	const scoreEl = createScoreElement(comment.score.toFixed(2));
+	const container = createDivContainerAndAppendElements(authorEl, deleteEl, dateEl, scoreEl);
+	children.push(container);
 
-	const authorEl = document.createElement("a");
-	authorEl.innerText = comment.author;
-	authorEl.setAttribute("href", `mailto:${comment.email}`);
-	authorEl.setAttribute("class", "author");
-
-	const deleteEl = document.createElement("img");
-	deleteEl.setAttribute("class", "trash");
-	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${comment.id})`);
-	deleteEl.setAttribute("src", "images/icons/trash.svg");
-
-	const scoreEl = document.createElement("span");
-	const score = comment.score.toFixed(2);
-	scoreEl.innerText = `Sentiment: ${score}`;
-
-	// Set class based on score -> The higher, the more "positive"
-	if (score >= 0.33) scoreEl.setAttribute("class", "score positive")
-	else if (score >= -0.33) scoreEl.setAttribute("class", "score neutral")
-	else scoreEl.setAttribute("class", "score negative");
-
-	const authorDateDeleteScoreContainer = document.createElement("div");
-	authorDateDeleteScoreContainer.appendChild(authorEl);
-	authorDateDeleteScoreContainer.appendChild(deleteEl);
-	authorDateDeleteScoreContainer.appendChild(dateEl);
-	authorDateDeleteScoreContainer.appendChild(scoreEl);
-	children.push(authorDateDeleteScoreContainer);
-
-	const textEl = document.createElement("p");
-	textEl.innerText = comment.comment;
-	textEl.setAttribute("class", "comment-text");
+	const textEl = createTextElement(comment.comment);
 	children.push(textEl);
 
 	const lineBreak = document.createElement("hr");
@@ -99,4 +72,60 @@ function createCommentElement(comment) {
 
 	children.forEach(child => el.appendChild(child));
 	return el;
+}
+
+/** Creates a container for all passed children elements */
+function createDivContainerAndAppendElements(...children) {
+	const container = document.createElement("div");
+	children.forEach(child => {
+		container.appendChild(child);
+	});
+	return container;
+}
+
+/** Creates a text element */
+function createTextElement(text) {
+	const textEl = document.createElement("p");
+	textEl.innerText = text;
+	textEl.setAttribute("class", "comment-text");
+	return textEl;
+}
+
+/** Creates a date element */
+function createDateElement(time) {
+	const dateEl = document.createElement("span");
+	const date = new Date(0);
+	date.setUTCSeconds(parseInt(time));
+	dateEl.innerText = date;
+	dateEl.setAttribute("class", "date");
+	return dateEl;
+}
+
+/** Creates an author element */
+function createAuthorElement(email, author) {
+	const authorEl = document.createElement("a");
+	authorEl.innerText = author;
+	authorEl.setAttribute("href", `mailto:${email}`);
+	authorEl.setAttribute("class", "author");
+	return authorEl;
+}
+
+/** Creates a delete element */
+function createDeleteElement(id) {
+	const deleteEl = document.createElement("img");
+	deleteEl.setAttribute("class", "trash");
+	deleteEl.setAttribute("onclick", `deleteCommentFromStorageById(${id})`);
+	deleteEl.setAttribute("src", "images/icons/trash.svg");
+	return deleteEl;
+}
+
+/** Creates a score element */
+function createScoreElement(score) {
+	const scoreEl = document.createElement("span");
+	scoreEl.innerText = `Sentiment: ${score}`;
+	// Set class based on score -> The higher, the more "positive"
+	if (score >= 0.33) scoreEl.setAttribute("class", "score positive")
+	else if (score >= -0.33) scoreEl.setAttribute("class", "score neutral")
+	else scoreEl.setAttribute("class", "score negative");
+	return scoreEl;
 }
