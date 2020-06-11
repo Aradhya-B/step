@@ -89,11 +89,7 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
-    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
-    LanguageServiceClient languageService = LanguageServiceClient.create();
-    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-    double score = sentiment.getScore();
-    languageService.close();
+    double score = getSentimentScore(comment);
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
@@ -107,6 +103,20 @@ public final class DataServlet extends HttpServlet {
 
     // Refresh after comment is submitted
     response.sendRedirect("/comments.html");
+  }
+
+  /*
+   * Gets the sentiment score for a comment by using
+   * the Google Natural Language AP.
+   * @return sentiment score for comment.
+   */
+  private double getSentimentScore(String comment) {
+    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    double score = sentiment.getScore();
+    languageService.close();
+    return score;
   }
 
   /*
