@@ -4,6 +4,7 @@
  */
 class Food {
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * @param {number} xConstraint1 First x-coordinate constraint
      * @param {number} xConstraint2 Second x-coordinate constraint
@@ -20,6 +21,8 @@ class Food {
         this.gridScale = gridScale;
         this.section = section;
 =======
+=======
+>>>>>>> Change tabs into spaces in Food.js
     /**
      * @param {number} xConstraint1 First x-coordinate constraint
      * @param {number} xConstraint2 Second x-coordinate constraint
@@ -35,7 +38,10 @@ class Food {
         this.yConstraint2 = yConstraint2;
         this.gridScale = gridScale;
         this.section = section;
+<<<<<<< HEAD
 >>>>>>> Change positional parameters to named parameters in Food class
+=======
+>>>>>>> Change tabs into spaces in Food.js
 
         /** @private {number} X-coordinate */
         this.x = this.setXLocation();
@@ -56,7 +62,11 @@ class Food {
         // grid, then shift the food right by the left constraint
         if (this.section === 2 || this.section === 4) return scaledCols += this.xConstraint1;
         return scaledCols;
+<<<<<<< HEAD
     }	
+=======
+    }   
+>>>>>>> Change tabs into spaces in Food.js
 
     /**
      * Randomly generates a y-coordinate for food based on given constraints and scale.
