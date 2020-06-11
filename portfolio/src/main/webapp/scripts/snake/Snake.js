@@ -6,6 +6,7 @@ class Snake {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * @param {number} x Starting x-coordinate
      * @param {number} y Starting y-coordinate
@@ -254,6 +255,8 @@ class Snake {
     death() {
 >>>>>>> Reduce distance needed from snake head to classify food as being eaten
 =======
+=======
+>>>>>>> Changes tabs into spaces in Snake.js
     /**
      * @param {number} x Starting x-coordinate
      * @param {number} y Starting y-coordinate
@@ -355,6 +358,7 @@ class Snake {
      * @return {boolean} True if hit tail, else false.
      */
     checkIfHitTail() {
+<<<<<<< HEAD
 >>>>>>> Change death handling to restart game when any ONE snake has died.
         for (let i = 0; i < this.tail.length; i++) {
             const distanceFromThisTailElement = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
@@ -390,6 +394,14 @@ class Snake {
                 return true;
             }
         }
+=======
+        for (let i = 0; i < this.tail.length; i++) {
+            const distanceFromThisTailElement = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
+            if (distanceFromThisTailElement < 1) {
+                return true;
+            }
+        }
+>>>>>>> Changes tabs into spaces in Snake.js
         return false;
     }
 
@@ -399,7 +411,10 @@ class Snake {
      */
     update() {
         // If the snake didn't eat anything, shift the entire snake first
+<<<<<<< HEAD
 >>>>>>> Change death handling to restart game when any ONE snake has died.
+=======
+>>>>>>> Changes tabs into spaces in Snake.js
         if (this.total === this.tail.length) {
             // Shift the tail by 1 piece to make room for the snakes position one frame ago (new head of the tail)
             for (let i = 0; i < this.tail.length - 1; i++) {
