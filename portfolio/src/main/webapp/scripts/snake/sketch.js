@@ -163,6 +163,14 @@ function windowResized() {
  * change direction of snake. Updates every snake on call.
  */
 function draw() {
+    // If any Snake has died, then reset the game
+    if (sec1.snake.death() || sec2.snake.death() || sec3.snake.death() || sec4.snake.death()) {
+        // No snake should be moving after initialization upon death
+        keyCode = null;
+        initializeGame();
+        return;
+    }
+
     // Make the canvas white
     background(255);
 
@@ -183,20 +191,16 @@ function draw() {
     // Check if an arrow key is being pressed to move the snakes
     snakeKeyPressed();
 
-    // Monitor if a snake has died, update the location of the snakes, and show them on the screen
-    sec1.snake.death();
+    // Update the location of the snakes and show them on the screen
     sec1.snake.update();
     sec1.snake.show();
 
-    sec2.snake.death();
     sec2.snake.update();
     sec2.snake.show();
 
-    sec3.snake.death();
     sec3.snake.update();
     sec3.snake.show();
 
-    sec4.snake.death();
     sec4.snake.update();
     sec4.snake.show();
 
