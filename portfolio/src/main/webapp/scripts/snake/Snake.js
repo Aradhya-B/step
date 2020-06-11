@@ -80,38 +80,46 @@ class Snake {
 	}
 
 	/**
-	 * Determines if the head of the snake is touching any tail element. If it is, the snake is
-	 * killed by setting the total length of the tail to 0 and removing all vector tail elements.
+	 * Determine if Snake has died by checking whether it has hit bounds or hit its
+	 * own tail.
+	 * @return {boolean} True if dead, else false.
 	 */
-	death() {
+	death() { return this.checkIfHitBounds() || this.checkIfHitTail(); }
+
+	/**
+	 * Determines if Snake has hit bounds and is moving in the direction of the boundary.
+	 * @return {boolean} True if hit bounds, else false.
+	 */
+	checkIfHitBounds() {
+		return (
+			this.x === this.xConstraint1 && this.xSpeed === -1 && this.ySpeed === 0 ||
+			this.x === this.xConstraint2 && this.xSpeed === 1 && this.ySpeed === 0 ||
+			this.y === this.yConstraint1 && this.xSpeed === 0 && this.ySpeed === -1 ||
+			this.y === this.yConstraint2 && this.xSpeed === 0 && this.ySpeed === 1
+		);
+	}
+
+	/**
+	 * Determines if Snake has hit any element of its tail.
+	 * @return {boolean} True if hit tail, else false.
+	 */
+	checkIfHitTail() {
         for (let i = 0; i < this.tail.length; i++) {
             const distanceFromThisTailElement = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
             if (distanceFromThisTailElement < 1) {
                 this.total = 0;
                 this.tail = [];
-				break;
+				return true;
             }
         }
+		return false;
 	}
 
 	/**
 	 * Updates the position of the snake. If the snake has recently eaten food, i.e. total tail 
 	 * elements counter is greater than current length of the tail, then create a new tail element.
-	 * If the snake has reached a boundary and is moving in the direction of the boundary, update
-	 * the location of the snake to come out of the opposite boundary.
 	 */
 	update() {
-        // If the snake has reached a boundary and is moving in that direction, set it's position to be the opposite boundary
-        if (this.x === this.xConstraint1 && this.xSpeed === -1 && this.ySpeed === 0) {
-            this.x = this.xConstraint2;
-        } else if (this.x === this.xConstraint2 && this.xSpeed === 1 && this.ySpeed === 0) {
-            this.x = this.xConstraint1;
-        } else if (this.y === this.yConstraint1 && this.xSpeed === 0 && this.ySpeed === -1) {
-            this.y = this.yConstraint2;
-        } else if (this.y === this.yConstraint2 && this.xSpeed === 0 && this.ySpeed === 1) {
-            this.y = this.yConstraint1;
-        }
-
 		// If the snake didn't eat anything, shift the entire snake first
         if (this.total === this.tail.length) {
             // Shift the tail by 1 piece to make room for the snakes position one frame ago (new head of the tail)
