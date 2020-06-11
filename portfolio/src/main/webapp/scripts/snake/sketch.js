@@ -38,8 +38,8 @@ function setup() {
     cnv.parent('canvas-container');
     // Resize the canvas based on container dimensions
     cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-	// Initialize the game upon setup
-	initializeGame();
+    // Initialize the game upon setup
+    initializeGame();
 }
 
 /**
@@ -48,7 +48,7 @@ function setup() {
  * Creates a new Snake and instance of Food in each section.
  */
 function initializeGame() {
-	// Determine middle line boundaries of the canvas container
+    // Determine middle line boundaries of the canvas container
     const halfWidth = floor(cnvDiv.offsetWidth / 2);
     const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
@@ -64,87 +64,87 @@ function initializeGame() {
 
     // Create a new snake for each section and set it in the top left corner of the section
     sec1.snake = new Snake({
-		x: 0, 
-		y: 0, 
-		xConstraint1: 0, 
-		xConstraint2: halfWidth - GRID_SCALE, 
-		yConstraint1: 0, 
-		yConstraint2: halfHeight - GRID_SCALE, 
-		gridScale: GRID_SCALE, 
-		red: 255, 
-		green: 0, 
-		blue: 0
-	});
+        x: 0, 
+        y: 0, 
+        xConstraint1: 0, 
+        xConstraint2: halfWidth - GRID_SCALE, 
+        yConstraint1: 0, 
+        yConstraint2: halfHeight - GRID_SCALE, 
+        gridScale: GRID_SCALE, 
+        red: 255, 
+        green: 0, 
+        blue: 0
+    });
     sec2.snake = new Snake({
-		x: halfWidth, 
-		y: 0, 
-		xConstraint1: halfWidth, 
-		xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
-		yConstraint1: 0, 
-		yConstraint2: halfHeight - GRID_SCALE, 
-		gridScale: GRID_SCALE, 
-		red: 0, 
-		green: 255, 
-		blue: 0
-	});
+        x: halfWidth, 
+        y: 0, 
+        xConstraint1: halfWidth, 
+        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
+        yConstraint1: 0, 
+        yConstraint2: halfHeight - GRID_SCALE, 
+        gridScale: GRID_SCALE, 
+        red: 0, 
+        green: 255, 
+        blue: 0
+    });
     sec3.snake = new Snake({
-		x: 0, 
-		y: halfHeight, 
-		xConstraint1: 0, 
-		xConstraint2: halfWidth - GRID_SCALE,
-		yConstraint1: halfHeight,
-		yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-		gridScale: GRID_SCALE, 
-		red: 255, 
-		green: 0, 
-		blue: 255
-	});
+        x: 0, 
+        y: halfHeight, 
+        xConstraint1: 0, 
+        xConstraint2: halfWidth - GRID_SCALE,
+        yConstraint1: halfHeight,
+        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+        gridScale: GRID_SCALE, 
+        red: 255, 
+        green: 0, 
+        blue: 255
+    });
     sec4.snake = new Snake({
-		x: halfWidth, 
-		y: halfHeight, 
-		xConstraint1: halfWidth, 
-		xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-		yConstraint1: halfHeight,
-		yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-		gridScale: GRID_SCALE, 
-		red: 255, 
-		green: 100, 
-		blue: 100
-	});
+        x: halfWidth, 
+        y: halfHeight, 
+        xConstraint1: halfWidth, 
+        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+        yConstraint1: halfHeight,
+        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+        gridScale: GRID_SCALE, 
+        red: 255, 
+        green: 100, 
+        blue: 100
+    });
 
     // Initialize new food in each section based on the section's constraints 
     sec1.food = new Food({
-		xConstraint1: 0, 
-		xConstraint2: halfWidth - GRID_SCALE,
-		yConstraint1: 0,
-		yConstraint2: halfHeight - GRID_SCALE,
-		gridScale: GRID_SCALE,
-		section: 1
-	});
-	sec2.food = new Food({
-		xConstraint1: halfWidth, 
-		xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-		yConstraint1: 0,
-		yConstraint2: halfHeight - GRID_SCALE,
-		gridScale: GRID_SCALE,
-		section: 2
-	});
+        xConstraint1: 0, 
+        xConstraint2: halfWidth - GRID_SCALE,
+        yConstraint1: 0,
+        yConstraint2: halfHeight - GRID_SCALE,
+        gridScale: GRID_SCALE,
+        section: 1
+    });
+    sec2.food = new Food({
+        xConstraint1: halfWidth, 
+        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+        yConstraint1: 0,
+        yConstraint2: halfHeight - GRID_SCALE,
+        gridScale: GRID_SCALE,
+        section: 2
+    });
     sec3.food = new Food({
-		xConstraint1: 0, 
-		xConstraint2: halfWidth - GRID_SCALE,
-		yConstraint1: halfHeight,
-		yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-		gridScale: GRID_SCALE,
-		section: 3
-	});
+        xConstraint1: 0, 
+        xConstraint2: halfWidth - GRID_SCALE,
+        yConstraint1: halfHeight,
+        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+        gridScale: GRID_SCALE,
+        section: 3
+    });
     sec4.food = new Food({
-		xConstraint1: halfWidth, 
-		xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-		yConstraint1: halfHeight,
-		yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-		gridScale: GRID_SCALE,
-		section: 4
-	});
+        xConstraint1: halfWidth, 
+        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+        yConstraint1: halfHeight,
+        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+        gridScale: GRID_SCALE,
+        section: 4
+    });
 }
 
 /*
@@ -154,7 +154,7 @@ function initializeGame() {
  */
 function windowResized() {
     cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-	initializeGame();
+    initializeGame();
 }
 
 /*
@@ -163,13 +163,13 @@ function windowResized() {
  * change direction of snake. Updates every snake on call.
  */
 function draw() {
-	// If any Snake has died, then reset the game
-	if (sec1.snake.death() || sec2.snake.death() || sec3.snake.death() || sec4.snake.death()) {
-		// No snake should be moving after initialization upon death
-		keyCode = null;
-		initializeGame();
-		return;
-	}
+    // If any Snake has died, then reset the game
+    if (sec1.snake.death() || sec2.snake.death() || sec3.snake.death() || sec4.snake.death()) {
+        // No snake should be moving after initialization upon death
+        keyCode = null;
+        initializeGame();
+        return;
+    }
 
     // Make the canvas white
     background(255);
@@ -178,7 +178,7 @@ function draw() {
     const diff = document.getElementById('game-difficulty').value;
     frameRate(difficultyMap[diff]);
 
-	// Determine middle line boundaries of the canvas container
+    // Determine middle line boundaries of the canvas container
     const halfWidth = floor(cnvDiv.offsetWidth / 2);
     const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
@@ -206,47 +206,47 @@ function draw() {
 
     // If the snakes ate food, then spawn new food in a different random location 
     if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
-		sec1.food = new Food({
-			xConstraint1: 0, 
-			xConstraint2: halfWidth - GRID_SCALE,
-			yConstraint1: 0,
-			yConstraint2: halfHeight - GRID_SCALE,
-			gridScale: GRID_SCALE,
-			section: 1
-		});
+        sec1.food = new Food({
+            xConstraint1: 0, 
+            xConstraint2: halfWidth - GRID_SCALE,
+            yConstraint1: 0,
+            yConstraint2: halfHeight - GRID_SCALE,
+            gridScale: GRID_SCALE,
+            section: 1
+        });
     }
     if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
-		sec2.food = new Food({
-			xConstraint1: halfWidth, 
-			xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-			yConstraint1: 0,
-			yConstraint2: halfHeight - GRID_SCALE,
-			gridScale: GRID_SCALE,
-			section: 2
-		});
+        sec2.food = new Food({
+            xConstraint1: halfWidth, 
+            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+            yConstraint1: 0,
+            yConstraint2: halfHeight - GRID_SCALE,
+            gridScale: GRID_SCALE,
+            section: 2
+        });
     }
     if (sec3.snake.eat(sec3.food.x, sec3.food.y)) {
-		sec3.food = new Food({
-			xConstraint1: 0, 
-			xConstraint2: halfWidth - GRID_SCALE,
-			yConstraint1: halfHeight,
-			yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-			gridScale: GRID_SCALE,
-			section: 3
-		});
+        sec3.food = new Food({
+            xConstraint1: 0, 
+            xConstraint2: halfWidth - GRID_SCALE,
+            yConstraint1: halfHeight,
+            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+            gridScale: GRID_SCALE,
+            section: 3
+        });
     }
     if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
-		sec4.food = new Food({
-			xConstraint1: halfWidth, 
-			xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-			yConstraint1: halfHeight,
-			yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-			gridScale: GRID_SCALE,
-			section: 4
-		});
+        sec4.food = new Food({
+            xConstraint1: halfWidth, 
+            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+            yConstraint1: halfHeight,
+            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+            gridScale: GRID_SCALE,
+            section: 4
+        });
     }
 
-	// The total score is the total length of the snake's tails
+    // The total score is the total length of the snake's tails
     const score = document.getElementById('score');
     score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
 
