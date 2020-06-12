@@ -91,11 +91,14 @@ class Snake {
      * @return {boolean} True if hit bounds, else false.
      */
     checkIfHitBounds() {
+        // Grid scale is subtracted/added from constraints to ensure that death on a boundary can only occur if
+        // a snake has a tail longer than just its own head. Right when the game begins, a snake cannot die
+        // on a boundary
         return (
-            this.x === this.xConstraint1 && this.xSpeed === -1 && this.ySpeed === 0 ||
-            this.x === this.xConstraint2 && this.xSpeed === 1 && this.ySpeed === 0 ||
-            this.y === this.yConstraint1 && this.xSpeed === 0 && this.ySpeed === -1 ||
-            this.y === this.yConstraint2 && this.xSpeed === 0 && this.ySpeed === 1
+            this.x === this.xConstraint1 - this.gridScale && this.xSpeed === -1 && this.ySpeed === 0 ||
+            this.x === this.xConstraint2 + this.gridScale && this.xSpeed === 1 && this.ySpeed === 0 ||
+            this.y === this.yConstraint1 - this.gridScale && this.xSpeed === 0 && this.ySpeed === -1 ||
+            this.y === this.yConstraint2 + this.gridScale && this.xSpeed === 0 && this.ySpeed === 1
         );
     }
 
