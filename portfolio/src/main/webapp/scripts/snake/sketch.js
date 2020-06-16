@@ -26,10 +26,7 @@ function preload() {
 }
 
 /**
- * Setup the 4-way segmented grid for 4-Snake. Set height and width of each section based on the
- * current size of the encapsulating container. 
- * Initialize a Snake in each section.
- * Initialize an instance of Food in each section.
+ * Setup the 4-way segmented grid for 4-Snake.
  */
 function setup() {
     // Initialize the canvas (can only have 1 instance)
