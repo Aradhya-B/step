@@ -223,6 +223,23 @@ select {
   float: right;
 }
 
+.score {
+  float: right;
+  padding-right: 1em;
+}
+
+.positive {
+  color: green;
+}
+
+.neutral {
+  color: #d18f13;
+}
+
+.negative {
+  color: red;
+}
+
 .author {
   float: left;
   color: #747474;

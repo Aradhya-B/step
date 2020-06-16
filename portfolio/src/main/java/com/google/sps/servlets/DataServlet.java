@@ -23,6 +23,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,12 +61,13 @@ public final class DataServlet extends HttpServlet {
     for (Entity entity: limitedResults) {
 
       long id = entity.getKey().getId();
+      double score = (double) entity.getProperty("score");
       String author = (String) entity.getProperty("author");
       String email = (String) entity.getProperty("email");
       long time = (long) entity.getProperty("time");
       String commentText = (String) entity.getProperty("comment");
 
-      Comment comment = new Comment(id, author, email, time, commentText);
+      Comment comment = new Comment(id, score, author, email, time, commentText);
       comments.add(comment);
     }
 
@@ -85,10 +89,13 @@ public final class DataServlet extends HttpServlet {
     String email = request.getParameter("email").trim();
     if (email.isEmpty()) email = "@";
 
+    double score = getSentimentScore(comment);
+
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("author", author);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("comment", comment);
+    commentEntity.setProperty("score", score);
     // Get current epoch seconds
     commentEntity.setProperty("time", System.currentTimeMillis() / 1000);
 
@@ -96,6 +103,19 @@ public final class DataServlet extends HttpServlet {
 
     // Refresh after comment is submitted
     response.sendRedirect("/comments.html");
+  }
+
+  /*
+   * Gets the sentiment score for a comment by using
+   * the Google Natural Language AP.
+   * @return sentiment score for comment.
+   */
+  private double getSentimentScore(String comment) throws IOException {
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Document doc = Document.newBuilder().setContent(comment).setType(Document.Type.PLAIN_TEXT).build();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    languageService.close();
+    return sentiment.getScore();
   }
 
   /*
