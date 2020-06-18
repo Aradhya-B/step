@@ -10,13 +10,14 @@ let sec4;
 /** Scale of the game (# of grids = (width * height / GRID_SCALE^2))*/
 const GRID_SCALE = 20;
 
-/** Map selected game difficulty to framerate to change the "speed" of the game */
-const difficultyMap = {
-    'easy' : 10,
-    'medium' : 20,
-    'hard' : 35,
-    'insane' : 50
+/** Enumerate framerate values as game difficulties selected by player */
+const Difficulty = {
+    EASY: 10,
+    MEDIUM: 20,
+    HARD: 35,
+    INSANE: 50
 }
+Object.freeze(Difficulty);
 
 /**
  * Get the HTML container to place the canvas in before loading.
@@ -59,6 +60,8 @@ function initializeGame() {
 /**
  * Create four game sections of equal size and different colors to
  * fit as a grid on the canvas.
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
  */
 function createFourGameSections(halfWidth, halfHeight) {
     sec1 = createGraphics(halfWidth, halfHeight);
@@ -74,6 +77,8 @@ function createFourGameSections(halfWidth, halfHeight) {
 /**
  * Creates a new snake in each game section and sets its initial 
  * location in the top left corner of each respective section.
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
  */
 function createSnakeInEachGameSection(halfWidth, halfHeight) {
     sec1.snake = new Snake({
@@ -128,6 +133,8 @@ function createSnakeInEachGameSection(halfWidth, halfHeight) {
 
 /**
  * Creates new food in each game section in a random location
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
  */
 function createFoodInEachGameSection(halfWidth, halfHeight) {
     sec1.food = new Food({
@@ -181,7 +188,7 @@ function windowResized() {
  */
 function draw() {
     // If any Snake has died, then reset the game
-    if (sec1.snake.death() || sec2.snake.death() || sec3.snake.death() || sec4.snake.death()) {
+    if (anySnakeDied()) {
         // No snake should be moving after initialization upon death
         keyCode = null;
         initializeGame();
@@ -191,24 +198,73 @@ function draw() {
     // Make the canvas white
     background(255);
 
-    // Set the frame rate based on difficulty
-    const diff = document.getElementById('game-difficulty').value;
-    frameRate(difficultyMap[diff]);
+  setGameDifficulty();
 
-    // Determine middle line boundaries of the canvas container
+  adjustSectionGraphicsBasedOnContainerDimensions();
+
+    snakeKeyPressed();
+
+  updateAndShowSnakes();
+
+  checkIfSnakesAteFoodAndSpawnNewFood();
+
+  setGameScore();
+
+  showAllFood();
+}
+
+/**
+ * Checks if a Snake in any section has died.
+ * @return {boolean} True if any Snake has died, else false.
+ */
+function anySnakeDied() {
+  return sec1.snake.death() || 
+    sec2.snake.death() || 
+    sec3.snake.death() || 
+    sec4.snake.death();
+}
+
+/**
+ * Sets the framerate based on difficulty selected by user.
+ */
+function setGameDifficulty() {
+    const difficulty = document.getElementById('game-difficulty').value;
+  switch (difficulty) {
+    case "easy":
+      frameRate(Difficulty.EASY);
+      break;
+    case "medium":
+      frameRate(Difficulty.MEDIUM);
+      break;
+    case "hard":
+      frameRate(Difficulty.HARD);
+      break;
+    case "insane":
+      frameRate(Difficulty.INSANE);
+      break;
+    default:
+      frameRate(Difficulty.EASY);
+  }
+}
+
+/**
+ * Adjusts the size of the graphics overlays in each section based on the
+ * dimensions of the containing canvas div.
+ */
+function adjustSectionGraphicsBasedOnContainerDimensions() {
     const halfWidth = floor(cnvDiv.offsetWidth / 2);
     const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
-    // Display the graphics overlays in the right locations 
     image(sec1, 0, 0);
     image(sec2, halfWidth, 0);
     image(sec3, 0, halfHeight);
     image(sec4, halfWidth, halfHeight);
+}
 
-    // Check if an arrow key is being pressed to move the snakes
-    snakeKeyPressed();
-
-    // Update the location of the snakes and show them on the screen
+/**
+ * Update the location of the snakes and show them on the screen.
+ */
+function updateAndShowSnakes() {
     sec1.snake.update();
     sec1.snake.show();
 
@@ -220,8 +276,16 @@ function draw() {
 
     sec4.snake.update();
     sec4.snake.show();
+}
 
-    // If the snakes ate food, then spawn new food in a different random location 
+/**
+ * Check if the Snakes ate the food in their section and if
+ * they did, spawn new food in that section.
+ */
+function checkIfSnakesAteFoodAndSpawnNewFood() {
+    const halfWidth = floor(cnvDiv.offsetWidth / 2);
+    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+
     if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
         sec1.food = new Food({
             xConstraint1: 0, 
@@ -262,12 +326,21 @@ function draw() {
             section: 4
         });
     }
+}
 
-    // The total score is the total length of the snake's tails
+/**
+ * Sets total score for game by calculating total length
+ * of all the Snakes tails.
+ */
+function setGameScore() {
     const score = document.getElementById('score');
     score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
+}
 
-    // Show the food overlays
+/**
+ * Shows the food in every game section on the screen.
+ */
+function showAllFood() {
     sec1.food.show();
     sec2.food.show();
     sec3.food.show();
