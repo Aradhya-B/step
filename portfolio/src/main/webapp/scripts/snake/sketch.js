@@ -12,10 +12,10 @@ const GRID_SCALE = 20;
 
 /** Enumerate framerate values as game difficulties selected by player */
 const Difficulty = {
-    EASY: 10,
-    MEDIUM: 20,
-    HARD: 35,
-    INSANE: 50
+  EASY: 10,
+  MEDIUM: 20,
+  HARD: 35,
+  INSANE: 50
 }
 Object.freeze(Difficulty);
 
@@ -23,21 +23,21 @@ Object.freeze(Difficulty);
  * Get the HTML container to place the canvas in before loading.
  */
 function preload() {
-    cnvDiv = document.getElementById('canvas-container');
+  cnvDiv = document.getElementById('canvas-container');
 }
 
 /**
  * Setup the 4-way segmented grid for 4-Snake.
  */
 function setup() {
-    // Initialize the canvas (can only have 1 instance)
-    canvas = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    // Set the encapsulating container of the canvas
-    canvas.parent('canvas-container');
-    // Resize the canvas based on container dimensions
-    canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    // Initialize the game upon setup
-    initializeGame();
+  // Initialize the canvas (can only have 1 instance)
+  canvas = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  // Set the encapsulating container of the canvas
+  canvas.parent('canvas-container');
+  // Resize the canvas based on container dimensions
+  canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  // Initialize the game upon setup
+  initializeGame();
 }
 
 /**
@@ -46,9 +46,9 @@ function setup() {
  * Creates a new Snake and instance of Food in each section.
  */
 function initializeGame() {
-    // Determine middle line boundaries of the canvas container
-    const halfWidth = floor(cnvDiv.offsetWidth / 2);
-    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  // Determine middle line boundaries of the canvas container
+  const halfWidth = floor(cnvDiv.offsetWidth / 2);
+  const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
   createFourGameSections(halfWidth, halfHeight);
 
@@ -64,14 +64,14 @@ function initializeGame() {
  * @param {number} halfHeight A number representing half the height of the game container
  */
 function createFourGameSections(halfWidth, halfHeight) {
-    sec1 = createGraphics(halfWidth, halfHeight);
-    sec1.background(123, 122, 211);
-    sec2 = createGraphics(halfWidth, halfHeight);
-    sec2.background(40, 74, 111);
-    sec3 = createGraphics(halfWidth, halfHeight);
-    sec3.background(243, 74, 111);
-    sec4 = createGraphics(halfWidth, halfHeight);
-    sec4.background(243, 255, 111);
+  sec1 = createGraphics(halfWidth, halfHeight);
+  sec1.background(123, 122, 211);
+  sec2 = createGraphics(halfWidth, halfHeight);
+  sec2.background(40, 74, 111);
+  sec3 = createGraphics(halfWidth, halfHeight);
+  sec3.background(243, 74, 111);
+  sec4 = createGraphics(halfWidth, halfHeight);
+  sec4.background(243, 255, 111);
 }
 
 /**
@@ -81,54 +81,54 @@ function createFourGameSections(halfWidth, halfHeight) {
  * @param {number} halfHeight A number representing half the height of the game container
  */
 function createSnakeInEachGameSection(halfWidth, halfHeight) {
-    sec1.snake = new Snake({
-        x: 0, 
-        y: 0, 
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE, 
-        yConstraint1: 0, 
-        yConstraint2: halfHeight - GRID_SCALE, 
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 0, 
-        blue: 0
-    });
-    sec2.snake = new Snake({
-        x: halfWidth, 
-        y: 0, 
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
-        yConstraint1: 0, 
-        yConstraint2: halfHeight - GRID_SCALE, 
-        gridScale: GRID_SCALE, 
-        red: 0, 
-        green: 255, 
-        blue: 0
-    });
-    sec3.snake = new Snake({
-        x: 0, 
-        y: halfHeight, 
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 0, 
-        blue: 255
-    });
-    sec4.snake = new Snake({
-        x: halfWidth, 
-        y: halfHeight, 
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 100, 
-        blue: 100
-    });
+  sec1.snake = new Snake({
+    x: 0, 
+    y: 0, 
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE, 
+    yConstraint1: 0, 
+    yConstraint2: halfHeight - GRID_SCALE, 
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 0, 
+    blue: 0
+  });
+  sec2.snake = new Snake({
+    x: halfWidth, 
+    y: 0, 
+    xConstraint1: halfWidth, 
+    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
+    yConstraint1: 0, 
+    yConstraint2: halfHeight - GRID_SCALE, 
+    gridScale: GRID_SCALE, 
+    red: 0, 
+    green: 255, 
+    blue: 0
+  });
+  sec3.snake = new Snake({
+    x: 0, 
+    y: halfHeight, 
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 0, 
+    blue: 255
+  });
+  sec4.snake = new Snake({
+    x: halfWidth, 
+    y: halfHeight, 
+    xConstraint1: halfWidth, 
+    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 100, 
+    blue: 100
+  });
 }
 
 /**
@@ -137,38 +137,38 @@ function createSnakeInEachGameSection(halfWidth, halfHeight) {
  * @param {number} halfHeight A number representing half the height of the game container
  */
 function createFoodInEachGameSection(halfWidth, halfHeight) {
-    sec1.food = new Food({
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: 0,
-        yConstraint2: halfHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 1
-    });
-    sec2.food = new Food({
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: 0,
-        yConstraint2: halfHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 2
-    });
-    sec3.food = new Food({
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 3
-    });
-    sec4.food = new Food({
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 4
-    });
+  sec1.food = new Food({
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: 0,
+    yConstraint2: halfHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 1
+  });
+  sec2.food = new Food({
+    xConstraint1: halfWidth, 
+    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: 0,
+    yConstraint2: halfHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 2
+  });
+  sec3.food = new Food({
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 3
+  });
+  sec4.food = new Food({
+    xConstraint1: halfWidth, 
+    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 4
+  });
 }
 
 /*
@@ -177,8 +177,8 @@ function createFoodInEachGameSection(halfWidth, halfHeight) {
  * different screen sizes comfortably.
  */
 function windowResized() {
-    canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    initializeGame();
+  canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  initializeGame();
 }
 
 /*
@@ -187,22 +187,22 @@ function windowResized() {
  * change direction of snake. Updates every snake on call.
  */
 function draw() {
-    // If any Snake has died, then reset the game
-    if (anySnakeDied()) {
-        // No snake should be moving after initialization upon death
-        keyCode = null;
-        initializeGame();
-        return;
-    }
+  // If any Snake has died, then reset the game
+  if (anySnakeDied()) {
+    // No snake should be moving after initialization upon death
+    keyCode = null;
+    initializeGame();
+    return;
+  }
 
-    // Make the canvas white
-    background(255);
+  // Make the canvas white
+  background(255);
 
   setGameDifficulty();
 
   adjustSectionGraphicsBasedOnContainerDimensions();
 
-    snakeKeyPressed();
+  snakeKeyPressed();
 
   updateAndShowSnakes();
 
@@ -228,7 +228,7 @@ function anySnakeDied() {
  * Sets the framerate based on difficulty selected by user.
  */
 function setGameDifficulty() {
-    const difficulty = document.getElementById('game-difficulty').value;
+  const difficulty = document.getElementById('game-difficulty').value;
   switch (difficulty) {
     case "easy":
       frameRate(Difficulty.EASY);
@@ -252,30 +252,30 @@ function setGameDifficulty() {
  * dimensions of the containing canvas div.
  */
 function adjustSectionGraphicsBasedOnContainerDimensions() {
-    const halfWidth = floor(cnvDiv.offsetWidth / 2);
-    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  const halfWidth = floor(cnvDiv.offsetWidth / 2);
+  const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
-    image(sec1, 0, 0);
-    image(sec2, halfWidth, 0);
-    image(sec3, 0, halfHeight);
-    image(sec4, halfWidth, halfHeight);
+  image(sec1, 0, 0);
+  image(sec2, halfWidth, 0);
+  image(sec3, 0, halfHeight);
+  image(sec4, halfWidth, halfHeight);
 }
 
 /**
  * Update the location of the snakes and show them on the screen.
  */
 function updateAndShowSnakes() {
-    sec1.snake.update();
-    sec1.snake.show();
+  sec1.snake.update();
+  sec1.snake.show();
 
-    sec2.snake.update();
-    sec2.snake.show();
+  sec2.snake.update();
+  sec2.snake.show();
 
-    sec3.snake.update();
-    sec3.snake.show();
+  sec3.snake.update();
+  sec3.snake.show();
 
-    sec4.snake.update();
-    sec4.snake.show();
+  sec4.snake.update();
+  sec4.snake.show();
 }
 
 /**
@@ -283,49 +283,49 @@ function updateAndShowSnakes() {
  * they did, spawn new food in that section.
  */
 function checkIfSnakesAteFoodAndSpawnNewFood() {
-    const halfWidth = floor(cnvDiv.offsetWidth / 2);
-    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  const halfWidth = floor(cnvDiv.offsetWidth / 2);
+  const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
-    if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
-        sec1.food = new Food({
-            xConstraint1: 0, 
-            xConstraint2: halfWidth - GRID_SCALE,
-            yConstraint1: 0,
-            yConstraint2: halfHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 1
-        });
-    }
-    if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
-        sec2.food = new Food({
-            xConstraint1: halfWidth, 
-            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-            yConstraint1: 0,
-            yConstraint2: halfHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 2
-        });
-    }
-    if (sec3.snake.eat(sec3.food.x, sec3.food.y)) {
-        sec3.food = new Food({
-            xConstraint1: 0, 
-            xConstraint2: halfWidth - GRID_SCALE,
-            yConstraint1: halfHeight,
-            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 3
-        });
-    }
-    if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
-        sec4.food = new Food({
-            xConstraint1: halfWidth, 
-            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-            yConstraint1: halfHeight,
-            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 4
-        });
-    }
+  if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
+    sec1.food = new Food({
+      xConstraint1: 0, 
+      xConstraint2: halfWidth - GRID_SCALE,
+      yConstraint1: 0,
+      yConstraint2: halfHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 1
+    });
+  }
+  if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
+    sec2.food = new Food({
+      xConstraint1: halfWidth, 
+      xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+      yConstraint1: 0,
+      yConstraint2: halfHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 2
+    });
+  }
+  if (sec3.snake.eat(sec3.food.x, sec3.food.y)) {
+    sec3.food = new Food({
+      xConstraint1: 0, 
+      xConstraint2: halfWidth - GRID_SCALE,
+      yConstraint1: halfHeight,
+      yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 3
+    });
+  }
+  if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
+    sec4.food = new Food({
+      xConstraint1: halfWidth, 
+      xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+      yConstraint1: halfHeight,
+      yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 4
+    });
+  }
 }
 
 /**
@@ -333,18 +333,18 @@ function checkIfSnakesAteFoodAndSpawnNewFood() {
  * of all the Snakes tails.
  */
 function setGameScore() {
-    const score = document.getElementById('score');
-    score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
+  const score = document.getElementById('score');
+  score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
 }
 
 /**
  * Shows the food in every game section on the screen.
  */
 function showAllFood() {
-    sec1.food.show();
-    sec2.food.show();
-    sec3.food.show();
-    sec4.food.show();
+  sec1.food.show();
+  sec2.food.show();
+  sec3.food.show();
+  sec4.food.show();
 }
 
 /*
@@ -352,25 +352,25 @@ function showAllFood() {
  * the direction of each snake accordingly.
  */
 function snakeKeyPressed() {
-    if (keyCode === UP_ARROW) {
-        sec1.snake.dir(0, -1);
-        sec2.snake.dir(0, -1);
-        sec3.snake.dir(0, -1);
-        sec4.snake.dir(0, -1);
-    } else if (keyCode === DOWN_ARROW) {
-        sec1.snake.dir(0, 1);
-        sec2.snake.dir(0, 1);
-        sec3.snake.dir(0, 1);
-        sec4.snake.dir(0, 1);
-    } else if (keyCode === RIGHT_ARROW) {
-        sec1.snake.dir(1, 0);
-        sec2.snake.dir(1, 0);
-        sec3.snake.dir(1, 0);
-        sec4.snake.dir(1, 0);
-    } else if (keyCode === LEFT_ARROW) {
-        sec1.snake.dir(-1, 0);
-        sec2.snake.dir(-1, 0);
-        sec3.snake.dir(-1, 0);
-        sec4.snake.dir(-1, 0);
-    }
+  if (keyCode === UP_ARROW) {
+    sec1.snake.dir(0, -1);
+    sec2.snake.dir(0, -1);
+    sec3.snake.dir(0, -1);
+    sec4.snake.dir(0, -1);
+  } else if (keyCode === DOWN_ARROW) {
+    sec1.snake.dir(0, 1);
+    sec2.snake.dir(0, 1);
+    sec3.snake.dir(0, 1);
+    sec4.snake.dir(0, 1);
+  } else if (keyCode === RIGHT_ARROW) {
+    sec1.snake.dir(1, 0);
+    sec2.snake.dir(1, 0);
+    sec3.snake.dir(1, 0);
+    sec4.snake.dir(1, 0);
+  } else if (keyCode === LEFT_ARROW) {
+    sec1.snake.dir(-1, 0);
+    sec2.snake.dir(-1, 0);
+    sec3.snake.dir(-1, 0);
+    sec4.snake.dir(-1, 0);
+  }
 }
