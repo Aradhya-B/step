@@ -1,5 +1,5 @@
 /** Game board */
-let cnv;
+let canvas;
 /** Game board container in HTML */
 let cnvDiv;
 /** 4 sections on canvas to represent grids for 4-Snake */
@@ -30,11 +30,11 @@ function preload() {
  */
 function setup() {
     // Initialize the canvas (can only have 1 instance)
-    cnv = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+    canvas = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
     // Set the encapsulating container of the canvas
-    cnv.parent('canvas-container');
+    canvas.parent('canvas-container');
     // Resize the canvas based on container dimensions
-    cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+    canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
     // Initialize the game upon setup
     initializeGame();
 }
@@ -150,7 +150,7 @@ function initializeGame() {
  * different screen sizes comfortably.
  */
 function windowResized() {
-    cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+    canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
     initializeGame();
 }
 
