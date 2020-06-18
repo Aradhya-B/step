@@ -49,7 +49,18 @@ function initializeGame() {
     const halfWidth = floor(cnvDiv.offsetWidth / 2);
     const halfHeight = floor(cnvDiv.offsetHeight / 2);
 
-    // Create 4 game sections of equal size and different colors to fit as a grid on the canvas  
+  createFourGameSections(halfWidth, halfHeight);
+
+  createSnakeInEachGameSection(halfWidth, halfHeight);
+
+  createFoodInEachGameSection(halfWidth, halfHeight);
+}
+
+/**
+ * Create four game sections of equal size and different colors to
+ * fit as a grid on the canvas.
+ */
+function createFourGameSections(halfWidth, halfHeight) {
     sec1 = createGraphics(halfWidth, halfHeight);
     sec1.background(123, 122, 211);
     sec2 = createGraphics(halfWidth, halfHeight);
@@ -58,8 +69,13 @@ function initializeGame() {
     sec3.background(243, 74, 111);
     sec4 = createGraphics(halfWidth, halfHeight);
     sec4.background(243, 255, 111);
+}
 
-    // Create a new snake for each section and set it in the top left corner of the section
+/**
+ * Creates a new snake in each game section and sets its initial 
+ * location in the top left corner of each respective section.
+ */
+function createSnakeInEachGameSection(halfWidth, halfHeight) {
     sec1.snake = new Snake({
         x: 0, 
         y: 0, 
@@ -108,8 +124,12 @@ function initializeGame() {
         green: 100, 
         blue: 100
     });
+}
 
-    // Initialize new food in each section based on the section's constraints 
+/**
+ * Creates new food in each game section in a random location
+ */
+function createFoodInEachGameSection(halfWidth, halfHeight) {
     sec1.food = new Food({
         xConstraint1: 0, 
         xConstraint2: halfWidth - GRID_SCALE,
