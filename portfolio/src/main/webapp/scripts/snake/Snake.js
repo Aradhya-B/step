@@ -80,19 +80,12 @@ class Snake {
     }
 
     /**
-     * Determine if Snake has died by checking whether it has hit bounds or hit its
-     * own tail.
-     * @return {boolean} True if dead, else false.
-     */
-    death() { return this.checkIfHitTail() }
-
-    /**
-     * Determines if Snake has hit any element of its tail.
+     * Determines if Snake has hit any element of its tail resulting in death.
    * When the Snake hits a boundary, the tail collapses so 
-   * the Snake hits its tail whenever it hits a boundary.
+   * the Snake hits its tail whenever it hits a boundary as well.
      * @return {boolean} True if hit tail, else false.
      */
-    checkIfHitTail() {
+    death() {
         for (let i = 0; i < this.tail.length; i++) {
             const distanceFromThisTailElement = dist(this.x, this.y, this.tail[i].x, this.tail[i].y);
             if (distanceFromThisTailElement < 1) {
