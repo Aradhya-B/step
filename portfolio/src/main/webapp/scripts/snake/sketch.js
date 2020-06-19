@@ -1,7 +1,7 @@
 /** Game board */
-let cnv;
+let canvas;
 /** Game board container in HTML */
-let cnvDiv;
+let canvasDiv;
 /** 4 sections on canvas to represent grids for 4-Snake */
 let sec1;
 let sec2;
@@ -10,36 +10,34 @@ let sec4;
 /** Scale of the game (# of grids = (width * height / GRID_SCALE^2))*/
 const GRID_SCALE = 20;
 
-/** Map selected game difficulty to framerate to change the "speed" of the game */
-const difficultyMap = {
-    'easy' : 10,
-    'medium' : 20,
-    'hard' : 35,
-    'insane' : 50
+/** Enumerate framerate values as game difficulties selected by player */
+const Difficulty = {
+  EASY: 10,
+  MEDIUM: 20,
+  HARD: 35,
+  INSANE: 50
 }
+Object.freeze(Difficulty);
 
 /**
  * Get the HTML container to place the canvas in before loading.
  */
 function preload() {
-    cnvDiv = document.getElementById('canvas-container');
+  canvasDiv = document.getElementById('canvas-container');
 }
 
 /**
- * Setup the 4-way segmented grid for 4-Snake. Set height and width of each section based on the
- * current size of the encapsulating container. 
- * Initialize a Snake in each section.
- * Initialize an instance of Food in each section.
+ * Setup the 4-way segmented grid for 4-Snake.
  */
 function setup() {
-    // Initialize the canvas (can only have 1 instance)
-    cnv = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    // Set the encapsulating container of the canvas
-    cnv.parent('canvas-container');
-    // Resize the canvas based on container dimensions
-    cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    // Initialize the game upon setup
-    initializeGame();
+  // Initialize the canvas (can only have 1 instance)
+  canvas = createCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
+  // Set the encapsulating container of the canvas
+  canvas.parent('canvas-container');
+  // Resize the canvas based on container dimensions
+  canvas = resizeCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
+  // Initialize the game upon setup
+  initializeGame();
 }
 
 /**
@@ -48,103 +46,129 @@ function setup() {
  * Creates a new Snake and instance of Food in each section.
  */
 function initializeGame() {
-    // Determine middle line boundaries of the canvas container
-    const halfWidth = floor(cnvDiv.offsetWidth / 2);
-    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  // Determine middle line boundaries of the canvas container
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
 
-    // Create 4 game sections of equal size and different colors to fit as a grid on the canvas  
-    sec1 = createGraphics(halfWidth, halfHeight);
-    sec1.background(123, 122, 211);
-    sec2 = createGraphics(halfWidth, halfHeight);
-    sec2.background(40, 74, 111);
-    sec3 = createGraphics(halfWidth, halfHeight);
-    sec3.background(243, 74, 111);
-    sec4 = createGraphics(halfWidth, halfHeight);
-    sec4.background(243, 255, 111);
+  createFourGameSections(halfWidth, halfHeight);
 
-    // Create a new snake for each section and set it in the top left corner of the section
-    sec1.snake = new Snake({
-        x: 0, 
-        y: 0, 
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE, 
-        yConstraint1: 0, 
-        yConstraint2: halfHeight - GRID_SCALE, 
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 0, 
-        blue: 0
-    });
-    sec2.snake = new Snake({
-        x: halfWidth, 
-        y: 0, 
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
-        yConstraint1: 0, 
-        yConstraint2: halfHeight - GRID_SCALE, 
-        gridScale: GRID_SCALE, 
-        red: 0, 
-        green: 255, 
-        blue: 0
-    });
-    sec3.snake = new Snake({
-        x: 0, 
-        y: halfHeight, 
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 0, 
-        blue: 255
-    });
-    sec4.snake = new Snake({
-        x: halfWidth, 
-        y: halfHeight, 
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE, 
-        red: 255, 
-        green: 100, 
-        blue: 100
-    });
+  createSnakeInEachGameSection(halfWidth, halfHeight);
 
-    // Initialize new food in each section based on the section's constraints 
-    sec1.food = new Food({
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: 0,
-        yConstraint2: halfHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 1
-    });
-    sec2.food = new Food({
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: 0,
-        yConstraint2: halfHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 2
-    });
-    sec3.food = new Food({
-        xConstraint1: 0, 
-        xConstraint2: halfWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 3
-    });
-    sec4.food = new Food({
-        xConstraint1: halfWidth, 
-        xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-        yConstraint1: halfHeight,
-        yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-        gridScale: GRID_SCALE,
-        section: 4
-    });
+  createFoodInEachGameSection(halfWidth, halfHeight);
+}
+
+/**
+ * Create four game sections of equal size and different colors to
+ * fit as a grid on the canvas.
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
+ */
+function createFourGameSections(halfWidth, halfHeight) {
+  sec1 = createGraphics(halfWidth, halfHeight);
+  sec1.background(123, 122, 211);
+  sec2 = createGraphics(halfWidth, halfHeight);
+  sec2.background(40, 74, 111);
+  sec3 = createGraphics(halfWidth, halfHeight);
+  sec3.background(243, 74, 111);
+  sec4 = createGraphics(halfWidth, halfHeight);
+  sec4.background(243, 255, 111);
+}
+
+/**
+ * Creates a new snake in each game section and sets its initial 
+ * location in the top left corner of each respective section.
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
+ */
+function createSnakeInEachGameSection(halfWidth, halfHeight) {
+  sec1.snake = new Snake({
+    x: 0, 
+    y: 0, 
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE, 
+    yConstraint1: 0, 
+    yConstraint2: halfHeight - GRID_SCALE, 
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 0, 
+    blue: 0
+  });
+  sec2.snake = new Snake({
+    x: halfWidth, 
+    y: 0, 
+    xConstraint1: halfWidth, 
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE, 
+    yConstraint1: 0, 
+    yConstraint2: halfHeight - GRID_SCALE, 
+    gridScale: GRID_SCALE, 
+    red: 0, 
+    green: 255, 
+    blue: 0
+  });
+  sec3.snake = new Snake({
+    x: 0, 
+    y: halfHeight, 
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 0, 
+    blue: 255
+  });
+  sec4.snake = new Snake({
+    x: halfWidth, 
+    y: halfHeight, 
+    xConstraint1: halfWidth, 
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE, 
+    red: 255, 
+    green: 100, 
+    blue: 100
+  });
+}
+
+/**
+ * Creates new food in each game section in a random location
+ * @param {number} halfWidth A number representing half the width of the game container
+ * @param {number} halfHeight A number representing half the height of the game container
+ */
+function createFoodInEachGameSection(halfWidth, halfHeight) {
+  sec1.food = new Food({
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: 0,
+    yConstraint2: halfHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 1
+  });
+  sec2.food = new Food({
+    xConstraint1: halfWidth, 
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: 0,
+    yConstraint2: halfHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 2
+  });
+  sec3.food = new Food({
+    xConstraint1: 0, 
+    xConstraint2: halfWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 3
+  });
+  sec4.food = new Food({
+    xConstraint1: halfWidth, 
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
+    yConstraint1: halfHeight,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+    gridScale: GRID_SCALE,
+    section: 4
+  });
 }
 
 /*
@@ -153,8 +177,8 @@ function initializeGame() {
  * different screen sizes comfortably.
  */
 function windowResized() {
-    cnv = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
-    initializeGame();
+  canvas = resizeCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
+  initializeGame();
 }
 
 /*
@@ -163,98 +187,164 @@ function windowResized() {
  * change direction of snake. Updates every snake on call.
  */
 function draw() {
-    // If any Snake has died, then reset the game
-    if (sec1.snake.death() || sec2.snake.death() || sec3.snake.death() || sec4.snake.death()) {
-        // No snake should be moving after initialization upon death
-        keyCode = null;
-        initializeGame();
-        return;
-    }
+  // If any Snake has died, then reset the game
+  if (anySnakeDied()) {
+    // No snake should be moving after initialization upon death
+    keyCode = null;
+    initializeGame();
+    return;
+  }
 
-    // Make the canvas white
-    background(255);
+  // Make the canvas white
+  background(255);
 
-    // Set the frame rate based on difficulty
-    const diff = document.getElementById('game-difficulty').value;
-    frameRate(difficultyMap[diff]);
+  setGameDifficulty();
 
-    // Determine middle line boundaries of the canvas container
-    const halfWidth = floor(cnvDiv.offsetWidth / 2);
-    const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  adjustSectionGraphicsBasedOnContainerDimensions();
 
-    // Display the graphics overlays in the right locations 
-    image(sec1, 0, 0);
-    image(sec2, halfWidth, 0);
-    image(sec3, 0, halfHeight);
-    image(sec4, halfWidth, halfHeight);
+  snakeKeyPressed();
 
-    // Check if an arrow key is being pressed to move the snakes
-    snakeKeyPressed();
+  updateAndShowSnakes();
 
-    // Update the location of the snakes and show them on the screen
-    sec1.snake.update();
-    sec1.snake.show();
+  checkIfSnakesAteFoodAndSpawnNewFood();
 
-    sec2.snake.update();
-    sec2.snake.show();
+  setGameScore();
 
-    sec3.snake.update();
-    sec3.snake.show();
+  showAllFood();
+}
 
-    sec4.snake.update();
-    sec4.snake.show();
+/**
+ * Checks if a Snake in any section has died.
+ * @return {boolean} True if any Snake has died, else false.
+ */
+function anySnakeDied() {
+  return sec1.snake.death() || 
+    sec2.snake.death() || 
+    sec3.snake.death() || 
+    sec4.snake.death();
+}
 
-    // If the snakes ate food, then spawn new food in a different random location 
-    if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
-        sec1.food = new Food({
-            xConstraint1: 0, 
-            xConstraint2: halfWidth - GRID_SCALE,
-            yConstraint1: 0,
-            yConstraint2: halfHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 1
-        });
-    }
-    if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
-        sec2.food = new Food({
-            xConstraint1: halfWidth, 
-            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-            yConstraint1: 0,
-            yConstraint2: halfHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 2
-        });
-    }
-    if (sec3.snake.eat(sec3.food.x, sec3.food.y)) {
-        sec3.food = new Food({
-            xConstraint1: 0, 
-            xConstraint2: halfWidth - GRID_SCALE,
-            yConstraint1: halfHeight,
-            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 3
-        });
-    }
-    if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
-        sec4.food = new Food({
-            xConstraint1: halfWidth, 
-            xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
-            yConstraint1: halfHeight,
-            yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
-            gridScale: GRID_SCALE,
-            section: 4
-        });
-    }
+/**
+ * Sets the framerate based on difficulty selected by user.
+ */
+function setGameDifficulty() {
+  const difficulty = document.getElementById('game-difficulty').value;
+  switch (difficulty) {
+    case "easy":
+      frameRate(Difficulty.EASY);
+      break;
+    case "medium":
+      frameRate(Difficulty.MEDIUM);
+      break;
+    case "hard":
+      frameRate(Difficulty.HARD);
+      break;
+    case "insane":
+      frameRate(Difficulty.INSANE);
+      break;
+    default:
+      frameRate(Difficulty.EASY);
+  }
+}
 
-    // The total score is the total length of the snake's tails
-    const score = document.getElementById('score');
-    score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
+/**
+ * Adjusts the size of the graphics overlays in each section based on the
+ * dimensions of the containing canvas div.
+ */
+function adjustSectionGraphicsBasedOnContainerDimensions() {
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
 
-    // Show the food overlays
-    sec1.food.show();
-    sec2.food.show();
-    sec3.food.show();
-    sec4.food.show();
+  image(sec1, 0, 0);
+  image(sec2, halfWidth, 0);
+  image(sec3, 0, halfHeight);
+  image(sec4, halfWidth, halfHeight);
+}
+
+/**
+ * Update the location of the snakes and show them on the screen.
+ */
+function updateAndShowSnakes() {
+  sec1.snake.update();
+  sec1.snake.show();
+
+  sec2.snake.update();
+  sec2.snake.show();
+
+  sec3.snake.update();
+  sec3.snake.show();
+
+  sec4.snake.update();
+  sec4.snake.show();
+}
+
+/**
+ * Check if the Snakes ate the food in their section and if
+ * they did, spawn new food in that section.
+ */
+function checkIfSnakesAteFoodAndSpawnNewFood() {
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
+
+  if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
+    sec1.food = new Food({
+      xConstraint1: 0, 
+      xConstraint2: halfWidth - GRID_SCALE,
+      yConstraint1: 0,
+      yConstraint2: halfHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 1
+    });
+  }
+  if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
+    sec2.food = new Food({
+      xConstraint1: halfWidth, 
+      xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
+      yConstraint1: 0,
+      yConstraint2: halfHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 2
+    });
+  }
+  if (sec3.snake.eat(sec3.food.x, sec3.food.y)) {
+    sec3.food = new Food({
+      xConstraint1: 0, 
+      xConstraint2: halfWidth - GRID_SCALE,
+      yConstraint1: halfHeight,
+      yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 3
+    });
+  }
+  if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
+    sec4.food = new Food({
+      xConstraint1: halfWidth, 
+      xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
+      yConstraint1: halfHeight,
+      yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
+      gridScale: GRID_SCALE,
+      section: 4
+    });
+  }
+}
+
+/**
+ * Sets total score for game by calculating total length
+ * of all the Snakes tails.
+ */
+function setGameScore() {
+  const score = document.getElementById('score');
+  score.innerHTML = "Score: " + (sec1.snake.total + sec2.snake.total + sec3.snake.total + sec4.snake.total);
+}
+
+/**
+ * Shows the food in every game section on the screen.
+ */
+function showAllFood() {
+  sec1.food.show();
+  sec2.food.show();
+  sec3.food.show();
+  sec4.food.show();
 }
 
 /*
@@ -262,25 +352,25 @@ function draw() {
  * the direction of each snake accordingly.
  */
 function snakeKeyPressed() {
-    if (keyCode === UP_ARROW) {
-        sec1.snake.dir(0, -1);
-        sec2.snake.dir(0, -1);
-        sec3.snake.dir(0, -1);
-        sec4.snake.dir(0, -1);
-    } else if (keyCode === DOWN_ARROW) {
-        sec1.snake.dir(0, 1);
-        sec2.snake.dir(0, 1);
-        sec3.snake.dir(0, 1);
-        sec4.snake.dir(0, 1);
-    } else if (keyCode === RIGHT_ARROW) {
-        sec1.snake.dir(1, 0);
-        sec2.snake.dir(1, 0);
-        sec3.snake.dir(1, 0);
-        sec4.snake.dir(1, 0);
-    } else if (keyCode === LEFT_ARROW) {
-        sec1.snake.dir(-1, 0);
-        sec2.snake.dir(-1, 0);
-        sec3.snake.dir(-1, 0);
-        sec4.snake.dir(-1, 0);
-    }
+  if (keyCode === UP_ARROW) {
+    sec1.snake.dir(0, -1);
+    sec2.snake.dir(0, -1);
+    sec3.snake.dir(0, -1);
+    sec4.snake.dir(0, -1);
+  } else if (keyCode === DOWN_ARROW) {
+    sec1.snake.dir(0, 1);
+    sec2.snake.dir(0, 1);
+    sec3.snake.dir(0, 1);
+    sec4.snake.dir(0, 1);
+  } else if (keyCode === RIGHT_ARROW) {
+    sec1.snake.dir(1, 0);
+    sec2.snake.dir(1, 0);
+    sec3.snake.dir(1, 0);
+    sec4.snake.dir(1, 0);
+  } else if (keyCode === LEFT_ARROW) {
+    sec1.snake.dir(-1, 0);
+    sec2.snake.dir(-1, 0);
+    sec3.snake.dir(-1, 0);
+    sec4.snake.dir(-1, 0);
+  }
 }
