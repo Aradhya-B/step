@@ -317,6 +317,45 @@ hr {
   color: #0c8716;
 }
 
+.snake {
+  height: 100%;
+  margin: 0;
+  /* Prevent scrolling on snake game page */
+  overflow: hidden;
+}
+
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    padding: 5px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    flex: 0 1 auto;
+    align-items: center;
+}
+
+#diff-and-score {
+    display: flex;
+    flex-direction: row;
+}
+
+#score {
+    position: relative;
+    margin-left: 15px;
+}
+
+#canvas-container {
+    display: block;
+    max-height: 80%;
+    flex: 0.9 1 auto;
+    margin: 5px;
+}
+
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
   main {   
