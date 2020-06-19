@@ -1,7 +1,7 @@
 /** Game board */
 let canvas;
 /** Game board container in HTML */
-let cnvDiv;
+let canvasDiv;
 /** 4 sections on canvas to represent grids for 4-Snake */
 let sec1;
 let sec2;
@@ -23,7 +23,7 @@ Object.freeze(Difficulty);
  * Get the HTML container to place the canvas in before loading.
  */
 function preload() {
-  cnvDiv = document.getElementById('canvas-container');
+  canvasDiv = document.getElementById('canvas-container');
 }
 
 /**
@@ -31,11 +31,11 @@ function preload() {
  */
 function setup() {
   // Initialize the canvas (can only have 1 instance)
-  canvas = createCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  canvas = createCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
   // Set the encapsulating container of the canvas
   canvas.parent('canvas-container');
   // Resize the canvas based on container dimensions
-  canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  canvas = resizeCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
   // Initialize the game upon setup
   initializeGame();
 }
@@ -47,8 +47,8 @@ function setup() {
  */
 function initializeGame() {
   // Determine middle line boundaries of the canvas container
-  const halfWidth = floor(cnvDiv.offsetWidth / 2);
-  const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
 
   createFourGameSections(halfWidth, halfHeight);
 
@@ -97,7 +97,7 @@ function createSnakeInEachGameSection(halfWidth, halfHeight) {
     x: halfWidth, 
     y: 0, 
     xConstraint1: halfWidth, 
-    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE, 
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE, 
     yConstraint1: 0, 
     yConstraint2: halfHeight - GRID_SCALE, 
     gridScale: GRID_SCALE, 
@@ -111,7 +111,7 @@ function createSnakeInEachGameSection(halfWidth, halfHeight) {
     xConstraint1: 0, 
     xConstraint2: halfWidth - GRID_SCALE,
     yConstraint1: halfHeight,
-    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
     gridScale: GRID_SCALE, 
     red: 255, 
     green: 0, 
@@ -121,9 +121,9 @@ function createSnakeInEachGameSection(halfWidth, halfHeight) {
     x: halfWidth, 
     y: halfHeight, 
     xConstraint1: halfWidth, 
-    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
     yConstraint1: halfHeight,
-    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
     gridScale: GRID_SCALE, 
     red: 255, 
     green: 100, 
@@ -147,7 +147,7 @@ function createFoodInEachGameSection(halfWidth, halfHeight) {
   });
   sec2.food = new Food({
     xConstraint1: halfWidth, 
-    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
     yConstraint1: 0,
     yConstraint2: halfHeight - GRID_SCALE,
     gridScale: GRID_SCALE,
@@ -157,15 +157,15 @@ function createFoodInEachGameSection(halfWidth, halfHeight) {
     xConstraint1: 0, 
     xConstraint2: halfWidth - GRID_SCALE,
     yConstraint1: halfHeight,
-    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
     gridScale: GRID_SCALE,
     section: 3
   });
   sec4.food = new Food({
     xConstraint1: halfWidth, 
-    xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+    xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
     yConstraint1: halfHeight,
-    yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+    yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
     gridScale: GRID_SCALE,
     section: 4
   });
@@ -177,7 +177,7 @@ function createFoodInEachGameSection(halfWidth, halfHeight) {
  * different screen sizes comfortably.
  */
 function windowResized() {
-  canvas = resizeCanvas(floor(cnvDiv.offsetWidth), floor(cnvDiv.offsetHeight));
+  canvas = resizeCanvas(floor(canvasDiv.offsetWidth), floor(canvasDiv.offsetHeight));
   initializeGame();
 }
 
@@ -252,8 +252,8 @@ function setGameDifficulty() {
  * dimensions of the containing canvas div.
  */
 function adjustSectionGraphicsBasedOnContainerDimensions() {
-  const halfWidth = floor(cnvDiv.offsetWidth / 2);
-  const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
 
   image(sec1, 0, 0);
   image(sec2, halfWidth, 0);
@@ -283,8 +283,8 @@ function updateAndShowSnakes() {
  * they did, spawn new food in that section.
  */
 function checkIfSnakesAteFoodAndSpawnNewFood() {
-  const halfWidth = floor(cnvDiv.offsetWidth / 2);
-  const halfHeight = floor(cnvDiv.offsetHeight / 2);
+  const halfWidth = floor(canvasDiv.offsetWidth / 2);
+  const halfHeight = floor(canvasDiv.offsetHeight / 2);
 
   if (sec1.snake.eat(sec1.food.x, sec1.food.y)) {
     sec1.food = new Food({
@@ -299,7 +299,7 @@ function checkIfSnakesAteFoodAndSpawnNewFood() {
   if (sec2.snake.eat(sec2.food.x, sec2.food.y)) {
     sec2.food = new Food({
       xConstraint1: halfWidth, 
-      xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+      xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
       yConstraint1: 0,
       yConstraint2: halfHeight - GRID_SCALE,
       gridScale: GRID_SCALE,
@@ -311,7 +311,7 @@ function checkIfSnakesAteFoodAndSpawnNewFood() {
       xConstraint1: 0, 
       xConstraint2: halfWidth - GRID_SCALE,
       yConstraint1: halfHeight,
-      yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+      yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
       gridScale: GRID_SCALE,
       section: 3
     });
@@ -319,9 +319,9 @@ function checkIfSnakesAteFoodAndSpawnNewFood() {
   if (sec4.snake.eat(sec4.food.x, sec4.food.y)) {
     sec4.food = new Food({
       xConstraint1: halfWidth, 
-      xConstraint2: cnvDiv.offsetWidth - GRID_SCALE,
+      xConstraint2: canvasDiv.offsetWidth - GRID_SCALE,
       yConstraint1: halfHeight,
-      yConstraint2: cnvDiv.offsetHeight - GRID_SCALE,
+      yConstraint2: canvasDiv.offsetHeight - GRID_SCALE,
       gridScale: GRID_SCALE,
       section: 4
     });
